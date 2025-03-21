@@ -12,4 +12,6 @@ R is an open-source programming language for statistical computing and graphics.
 
 ## Prerequisites
 
-A laptop with R/RStudio installed; previous experience using R is NOT required; basic programming knowledge would be helpful but NOT required.
+* A laptop with R/RStudio installed
+* Previous experience using R is NOT required
+* Basic programming knowledge would be helpful but NOT required.
