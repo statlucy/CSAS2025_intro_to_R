@@ -1,0 +1,404 @@
+---
+title: Introduction to R
+subtitle: Connecticut Sports Analystics Symposium 2025
+author: Lucy Liu
+date: 11 April 2025
+date-format: "MMMM D, YYYY, 1:00-2:10"
+institute: Department of Statistics | University of Connecticut
+format:
+    revealjs:
+        preview-links: true
+        theme: simple
+        ratio: '16:9'
+        slide-number: true
+    html:
+        output-file: web.html
+    
+css: style.css
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Welcome
+
+-   This workshop is a part of [Connecticut Sports Analytics Symposium (CSAS) 2025](https://statds.org/events/csas2025/index.html).
+
+-   This workshop aims to give a quick tour of R.
+
+-   All source codes of related documents of this workshop are in the GitHub repository: <https://github.com/statlucy/CSAS2025_intro_to_R>.
+
+## Prerequisites
+
+-   A laptop with R/RStudio installed
+    -   R can be downloaded for windows users [here](https://cran.r-project.org/bin/windows/base/) and for Mac users [here](https://cran.r-project.org/bin/macosx/).
+    -   RStudio can be downloaded for all users [here](https://www.rstudio.com/products/rstudio/download/).
+-   Little to no experience with R.
+
+## Outline
+
+-   R Basics
+
+-   Data importation
+
+-   Data Manipulation
+
+-   Data Visualization
+
+## What is R?
+
+-   Language and environment for statistical computing
+
+-   Based on the (proprietary) S language, but open source and open development
+
+-   Homepage: https://www.r-project.org
+
+-   The Comprehensive R Archive Network (CRAN): https://cran.r-project.org
+
+-   FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html
+
+## Why R?
+
+> -   Open source (free software)
+> -   Runs on every major operating system
+> -   Active community (Frequent releases)
+> -   Great package ecosystem (\> 12,000 packages available on CRAN now)
+> -   Easy to get started (with some programming experience of MATLAB, C++, Python, etc.)
+> -   RStudio
+
+## What is RStudio?
+
+-   RStudio is an integrated development environment (IDE) for R.
+
+-   It’s got everything you need to do data science in R
+
+-   This IDE is one of the better reasons to use R
+
+## RStudio Interface
+
+<center>
+
+![](./rstudio_ide.png){#id .class width="65%" height="65%"}
+
+## Get started
+
+Create a new R script using File \> New File \> R Script.
+
+## Basic Computations
+
+You can do basic computations in R, either on the command line (in the console) or by writing things in the script and executing the code in the console.
+
+```{r}
+2 + 3
+```
+
+```{r}
+(18/3 + 1*2) ^ (4 - 2) - 6.18273
+```
+
+## Assignment Operators
+
+Assign a value to a name using `<-`, `->`, or `=`.
+
+Example:
+
+```{r}
+x = (18/3 + 1*2) ^ (4 - 2) - 6.18273
+y = c(1, 3, 6, 9)
+
+x + y
+```
+
+-   Difference between `<-`/`->` and `=`:
+    -   `<-` and `->` are the traditional assignment operators in R. They are used to assign values to variables.
+    -   `=` is also used for assignment, but it's more commonly used within function calls to assign values to arguments.
+
+## Functions
+
+You can also apply functions to objects.
+
+```{r}
+x = runif(n = 20, min= 0, max = 1)
+x
+```
+
+```{r}
+mean(x)
+var(x)
+```
+
+## Environment
+
+We've now created two variables, x and y, which exist in the environment. You can see everything in the environment using ls(), or check out the environment pane in RStudio.
+
+```{r}
+ls()
+```
+
+## R Project
+
+First, let's create a local R project. Move the dataset into your directory and start a new R file.
+
+```{r}
+
+```
+
+## Install and Load R Packages
+
+-   Install a package syntax:
+
+install.packages("package_name")
+
+-   Load a package syntax:
+
+library(package_name)
+
+```{r, warning=FALSE}
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Paths
+
+There are two kinds of paths: - Absolute: a file or folder’s “full address” on your computer - Relative: directions to a file or folder from your current working directory
+
+```{r}
+getwd()
+```
+
+The absolute path to my csv file is
+
+```{r, echo=FALSE}
+"C:/Users/statl/Documents/GitHub/CSAS2025_intro_to_R/statcast_data.csv"
+```
+
+A relative path to the same file as the absolute path above is
+
+```{r, echo=FALSE}
+"./statcast_data.csv"
+```
+
+## Importing data tables
+
+```{r, warning = FALSE}
+statcast_data = read_csv(file = "./statcast_data.csv")
+```
+
+## Data Manipulation using Base R
+
+Check variables.
+
+```{r}
+str(statcast_data)
+```
+
+## Check names of variables in the dataset.
+
+```{r}
+names(statcast_data)
+```
+
+## Display the first few rows of the dataset.
+
+```{r}
+head(statcast_data)
+```
+
+## Display the first 4 columns of the dataset.
+
+```{r}
+statcast_data[, 1:4]
+```
+
+## Display the first 4 rows of the dataset.
+
+```{r}
+statcast_data[1:4,]
+```
+
+## Data Manipulation using Base R (cont.)
+
+Display values of the variable "player_name".
+
+```{r}
+statcast_data$player_name
+```
+
+## Another way to display values
+
+```{r}
+statcast_data[, c("player_name")]
+```
+
+## Display the first 10 elements of the variables "player_name" and "game_date".
+
+```{r}
+statcast_data[1:10, c("player_name", "game_date")]
+```
+
+## Create a new variable
+
+Create a new variable "release_pos" by adding up values of variables "release_pos_x" and "release_pos_z".
+
+```{r}
+statcast_data$release_pos <- statcast_data$release_pos_x + statcast_data$release_pos_z
+```
+
+Display only "release_pos_x", "release_pos_z", and "release_pos" of the updated dataset.
+
+```{r}
+statcast_data[, c("release_pos_x", "release_pos_z", "release_pos")]
+```
+
+## dplyr
+
+-   The dplyr package can be used to
+    -   select relevant variables
+    -   filter out unnecessary obvservations
+    -   mutate new variables, or change existing ones
+    -   arrange in an easy to digest format
+
+## Data Manipulation using dplyr
+
+```{r}
+library(dplyr)
+```
+
+For a given analysis, you may only need a subset of the columns in a data table; extracting only what you need can helpfully de-clutter, especially when you have large datasets. Select columns using select.
+
+```{r}
+select(statcast_data, pitch_type, game_date, player_name, release_speed)
+```
+
+## Select (continued)
+
+You can specify the specify a range of columns to keep:
+
+```{r}
+select(statcast_data, pitch_type:player_name)
+```
+
+You can also specify columns you’d like to remove:
+
+```{r}
+select(statcast_data, -pitch_type)
+```
+
+## Select (continued)
+
+You can rename variables as part of this process:
+
+```{r}
+select(statcast_data, GAME_DATE = game_date , PlAyEr_NaMe = player_name)
+```
+
+## Rename
+
+If all you want to do is rename something, you can use rename instead of select. This will rename the variables you care about, and keep everything else:
+
+```{r}
+rename(statcast_data, GAME_DATE = game_date , release_SPEED = release_speed, PlAyEr_NaMe = player_name)
+```
+
+## Helper functions for select
+
+There are some handy helper functions for select; read about all of them using ?select_helpers. I use starts_with(), ends_with(), and contains() often, especially when there variables are named with suffixes or other standard patterns:
+
+```{r}
+select(statcast_data, starts_with("re"))
+```
+
+```{r}
+select(statcast_data, ends_with("er"))
+```
+
+## Filter
+
+Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t – this might break if the raw data are updated, and the thought process isn’t transparent. Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.
+
+You will often filter using comparison operators (\>, \>=, \<, \<=, ==, and !=). You may also use %in% to detect if values appear in a set, and is.na() to find missing values. The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare – and can be combined with other comparisons using the logical operators & and \|, or negated using !.
+
+```{r}
+filter(statcast_data, pitch_type == 'FF')
+```
+
+```{r}
+filter(statcast_data, pitch_type == 'FF' & release_speed >= 90)
+```
+
+## Omit missing observations
+
+To remove any row with a missing value:
+
+```{r}
+# drop_na(statcast_data) 
+```
+
+To remove rows for which a specific column is missing:
+
+```{r}
+drop_na(statcast_data, events) # will remove rows for which events is missing.
+```
+
+## More dplyr functions
+
+**Mutate:** To create new columns/add new variables while retaining the old ones, you can use mutate().
+
+**Arrange**: To arrange the rows in your data according to the values in one or more columns, use arrange()
+
+## Pipes
+
+-   Piping allows you to tie together a sequence of actions
+-   “New” to R (2014)
+-   Comes from the magrittr package; loaded by everything in the tidyverse
+
+## Pipes (continued)
+
+-   Sequence of actions to start my days
+    -   Wake up
+    -   Brush teeth
+    -   Do data science
+-   In “R”, I can nest these actions:
+
+```{r}
+#	happy_jeff = do_ds(brush_teeth(wake_up(asleep_jeff)))
+```
+
+## Pipes (continued)
+
+-   Alternatively, I could name a bunch of intermediate objects
+
+```{r}
+#   awake_jeff = wake_up(asleep_jeff)
+# 	clean_teeth_jeff = brush_teeth(awake_jeff)
+# 	happy_jeff = do_ds(clean_teeth_jeff)
+```
+
+## Pipes (continued)
+
+-   Using pipes is easier to read and understand, and avoids clutter
+-   shortcut on Windows: Ctrl + Shift + M
+-   shortcut on Mac: Cmd + Shift + M
+
+```{r}
+# happy_jeff = wake_up(asleep_jeff) %>%
+#   brush_teeth() %>% 
+#   do_ds()
+```
+
+-   Read "%\>%" as "and then"
+-   The result of one function gets passed as the first argument to the next one by default, although you can be more specific
+
+## Piping example
+
+```{r}
+statcast_data = 
+  read_csv("./statcast_data.csv") %>%
+  select(-description) %>%
+  mutate(
+    pitch_type = str_to_lower(pitch_type)) %>% 
+  drop_na(events)
+
+statcast_data
+```

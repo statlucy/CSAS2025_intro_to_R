@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="presentation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="presentation_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="presentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="presentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="Lucy Liu">
+  <title>Introduction to R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="style.css">
+  <link href="presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="presentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="presentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction to R</h1>
+  <p class="subtitle">Connecticut Sports Analystics Symposium 2025</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Lucy Liu 
+</div>
+        <p class="quarto-title-affiliation">
+            Department of Statistics | University of Connecticut
+          </p>
+    </div>
+</div>
+
+  <p class="date">April 11, 2025, 1:00-2:10</p>
+</section>
+<section id="welcome" class="slide level2">
+<h2>Welcome</h2>
+<ul>
+<li><p>This workshop is a part of <a href="https://statds.org/events/csas2025/index.html">Connecticut Sports Analytics Symposium (CSAS) 2025</a>.</p></li>
+<li><p>This workshop aims to give a quick tour of R.</p></li>
+<li><p>All source codes of related documents of this workshop are in the GitHub repository: <a href="https://github.com/statlucy/CSAS2025_intro_to_R" class="uri">https://github.com/statlucy/CSAS2025_intro_to_R</a>.</p></li>
+</ul>
+</section>
+<section id="prerequisites" class="slide level2">
+<h2>Prerequisites</h2>
+<ul>
+<li>A laptop with R/RStudio installed
+<ul>
+<li>R can be downloaded for windows users <a href="https://cran.r-project.org/bin/windows/base/">here</a> and for Mac users <a href="https://cran.r-project.org/bin/macosx/">here</a>.</li>
+<li>RStudio can be downloaded for all users <a href="https://www.rstudio.com/products/rstudio/download/">here</a>.</li>
+</ul></li>
+<li>Little to no experience with R.</li>
+</ul>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li><p>R Basics</p></li>
+<li><p>Data importation</p></li>
+<li><p>Data Manipulation</p></li>
+<li><p>Data Visualization</p></li>
+</ul>
+</section>
+<section id="what-is-r" class="slide level2">
+<h2>What is R?</h2>
+<ul>
+<li><p>Language and environment for statistical computing</p></li>
+<li><p>Based on the (proprietary) S language, but open source and open development</p></li>
+<li><p>Homepage: https://www.r-project.org</p></li>
+<li><p>The Comprehensive R Archive Network (CRAN): https://cran.r-project.org</p></li>
+<li><p>FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</p></li>
+</ul>
+</section>
+<section id="why-r" class="slide level2">
+<h2>Why R?</h2>
+<ul>
+<li class="fragment">Open source (free software)</li>
+<li class="fragment">Runs on every major operating system</li>
+<li class="fragment">Active community (Frequent releases)</li>
+<li class="fragment">Great package ecosystem (&gt; 12,000 packages available on CRAN now)</li>
+<li class="fragment">Easy to get started (with some programming experience of MATLAB, C++, Python, etc.)</li>
+<li class="fragment">RStudio</li>
+</ul>
+</section>
+<section id="what-is-rstudio" class="slide level2">
+<h2>What is RStudio?</h2>
+<ul>
+<li><p>RStudio is an integrated development environment (IDE) for R.</p></li>
+<li><p>It’s got everything you need to do data science in R</p></li>
+<li><p>This IDE is one of the better reasons to use R</p></li>
+</ul>
+</section>
+<section id="rstudio-interface" class="slide level2">
+<h2>RStudio Interface</h2>
+<center>
+<p><img data-src="./rstudio_ide.png" id="id" class="class" style="width:65.0%;height:65.0%"></p>
+</center></section>
+<section id="get-started" class="slide level2">
+<h2>Get started</h2>
+<p>Create a new R script using File &gt; New File &gt; R Script.</p>
+</section>
+<section id="basic-computations" class="slide level2">
+<h2>Basic Computations</h2>
+<p>You can do basic computations in R, either on the command line (in the console) or by writing things in the script and executing the code in the console.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>(<span class="dv">18</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span><span class="dv">2</span>) <span class="sc">^</span> (<span class="dv">4</span> <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fl">6.18273</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57.81727</code></pre>
+</div>
+</div>
+</section>
+<section id="assignment-operators" class="slide level2">
+<h2>Assignment Operators</h2>
+<p>Assign a value to a name using <code>&lt;-</code>, <code>-&gt;</code>, or <code>=</code>.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>x <span class="ot">=</span> (<span class="dv">18</span><span class="sc">/</span><span class="dv">3</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span><span class="dv">2</span>) <span class="sc">^</span> (<span class="dv">4</span> <span class="sc">-</span> <span class="dv">2</span>) <span class="sc">-</span> <span class="fl">6.18273</span></span>
+<span id="cb5-2"><a href=""></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>)</span>
+<span id="cb5-3"><a href=""></a></span>
+<span id="cb5-4"><a href=""></a>x <span class="sc">+</span> y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58.81727 60.81727 63.81727 66.81727</code></pre>
+</div>
+</div>
+<ul>
+<li>Difference between <code>&lt;-</code>/<code>-&gt;</code> and <code>=</code>:
+<ul>
+<li><code>&lt;-</code> and <code>-&gt;</code> are the traditional assignment operators in R. They are used to assign values to variables.</li>
+<li><code>=</code> is also used for assignment, but it’s more commonly used within function calls to assign values to arguments.</li>
+</ul></li>
+</ul>
+</section>
+<section id="functions" class="slide level2">
+<h2>Functions</h2>
+<p>You can also apply functions to objects.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>x <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min=</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb7-2"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.30178888 0.03798359 0.21029367 0.93383069 0.26233640 0.79855055
+ [7] 0.62284648 0.25843405 0.82302794 0.57647565 0.18993533 0.93182781
+[13] 0.78425096 0.99003320 0.01302616 0.16318950 0.13693960 0.69421181
+[19] 0.40630690 0.59507344</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4865181</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">var</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1048414</code></pre>
+</div>
+</div>
+</section>
+<section id="environment" class="slide level2">
+<h2>Environment</h2>
+<p>We’ve now created two variables, x and y, which exist in the environment. You can see everything in the environment using ls(), or check out the environment pane in RStudio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x" "y"</code></pre>
+</div>
+</div>
+</section>
+<section id="r-project" class="slide level2">
+<h2>R Project</h2>
+<p>First, let’s create a local R project. Move the dataset into your directory and start a new R file.</p>
+</section>
+<section id="install-and-load-r-packages" class="slide level2">
+<h2>Install and Load R Packages</h2>
+<ul>
+<li>Install a package syntax:</li>
+</ul>
+<p>install.packages(“package_name”)</p>
+<ul>
+<li>Load a package syntax:</li>
+</ul>
+<p>library(package_name)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb15-2"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="paths" class="slide level2">
+<h2>Paths</h2>
+<p>There are two kinds of paths: - Absolute: a file or folder’s “full address” on your computer - Relative: directions to a file or folder from your current working directory</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/statl/Documents/GitHub/CSAS2025_intro_to_R"</code></pre>
+</div>
+</div>
+<p>The absolute path to my csv file is</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/statl/Documents/GitHub/CSAS2025_intro_to_R/statcast_data.csv"</code></pre>
+</div>
+</div>
+<p>A relative path to the same file as the absolute path above is</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "./statcast_data.csv"</code></pre>
+</div>
+</div>
+</section>
+<section id="importing-data-tables" class="slide level2">
+<h2>Importing data tables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>statcast_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">"./statcast_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-manipulation-using-base-r" class="slide level2">
+<h2>Data Manipulation using Base R</h2>
+<p>Check variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">str</span>(statcast_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [999 × 113] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ pitch_type                      : chr [1:999] "FF" "CH" "SI" "KC" ...
+ $ game_date                       : chr [1:999] "4/2/2024" "4/2/2024" "4/2/2024" "4/2/2024" ...
+ $ release_speed                   : num [1:999] 95 88.5 95 80.8 95.4 90.7 91.8 94 89.9 93.4 ...
+ $ release_pos_x                   : num [1:999] -2.01 -2.09 -2.02 -3.13 -1.95 -1.26 1.75 -1.9 -1.14 -3.17 ...
+ $ release_pos_z                   : num [1:999] 5.22 4.95 5.12 5.61 5.12 5.13 4.89 4.99 5.01 5.63 ...
+ $ player_name                     : chr [1:999] "Rocchio, Brayan" "Rocchio, Brayan" "Rocchio, Brayan" "Rizzo, Anthony" ...
+ $ batter                          : num [1:999] 677587 677587 677587 519203 595978 ...
+ $ pitcher                         : num [1:999] 622491 622491 622491 668678 622491 ...
+ $ events                          : chr [1:999] "single" NA NA "field_out" ...
+ $ description                     : chr [1:999] "hit_into_play" "foul" "called_strike" "hit_into_play" ...
+ $ spin_dir                        : logi [1:999] NA NA NA NA NA NA ...
+ $ spin_rate_deprecated            : logi [1:999] NA NA NA NA NA NA ...
+ $ break_angle_deprecated          : logi [1:999] NA NA NA NA NA NA ...
+ $ break_length_deprecated         : logi [1:999] NA NA NA NA NA NA ...
+ $ zone                            : num [1:999] 3 4 2 13 5 11 11 9 12 13 ...
+ $ des                             : chr [1:999] "Brayan Rocchio singles on a pop up to left fielder Dominic Canzone.   Bo Naylor to 2nd." "Brayan Rocchio singles on a pop up to left fielder Dominic Canzone.   Bo Naylor to 2nd." "Brayan Rocchio singles on a pop up to left fielder Dominic Canzone.   Bo Naylor to 2nd." "Anthony Rizzo grounds out softly, pitcher Zac Gallen to first baseman Christian Walker." ...
+ $ game_type                       : chr [1:999] "R" "R" "R" "R" ...
+ $ stand                           : chr [1:999] "L" "L" "L" "L" ...
+ $ p_throws                        : chr [1:999] "R" "R" "R" "R" ...
+ $ home_team                       : chr [1:999] "SEA" "SEA" "SEA" "AZ" ...
+ $ away_team                       : chr [1:999] "CLE" "CLE" "CLE" "NYY" ...
+ $ type                            : chr [1:999] "X" "S" "S" "X" ...
+ $ hit_location                    : num [1:999] 7 NA NA 1 2 NA NA NA NA NA ...
+ $ bb_type                         : chr [1:999] "popup" NA NA "ground_ball" ...
+ $ balls                           : num [1:999] 0 0 0 3 1 3 3 1 2 2 ...
+ $ strikes                         : num [1:999] 2 1 0 2 2 0 2 1 0 2 ...
+ $ game_year                       : num [1:999] 2024 2024 2024 2024 2024 ...
+ $ pfx_x                           : num [1:999] -0.85 -1.4 -1.48 0.5 -1.08 -1.45 0.93 -1.6 -1.45 -0.59 ...
+ $ pfx_z                           : num [1:999] 1.2 0.07 0.15 -1.1 0.9 0.09 1.04 0.39 0.07 1.49 ...
+ $ plate_x                         : num [1:999] 0.69 -0.3 -0.14 -1.01 -0.04 -2.25 -2.09 0.77 1.31 -1 ...
+ $ plate_z                         : num [1:999] 3.18 2.29 3.15 1.13 2.52 3.29 2.97 1.72 2.92 1.17 ...
+ $ on_3b                           : num [1:999] NA NA NA NA NA NA NA NA NA NA ...
+ $ on_2b                           : num [1:999] NA NA NA NA NA NA NA NA NA NA ...
+ $ on_1b                           : num [1:999] 666310 666310 666310 665742 666310 ...
+ $ outs_when_up                    : num [1:999] 2 2 2 2 1 2 0 1 2 2 ...
+ $ inning                          : num [1:999] 6 6 6 6 6 4 6 6 4 6 ...
+ $ inning_topbot                   : chr [1:999] "Top" "Top" "Top" "Top" ...
+ $ hc_x                            : num [1:999] 87.5 NA NA 113.8 NA ...
+ $ hc_y                            : num [1:999] 126 NA NA 188 NA ...
+ $ tfs_deprecated                  : logi [1:999] NA NA NA NA NA NA ...
+ $ tfs_zulu_deprecated             : logi [1:999] NA NA NA NA NA NA ...
+ $ umpire                          : logi [1:999] NA NA NA NA NA NA ...
+ $ sv_id                           : logi [1:999] NA NA NA NA NA NA ...
+ $ vx0                             : num [1:999] 8.81 7.15 8.1 3.79 7.32 ...
+ $ vy0                             : num [1:999] -138 -129 -138 -118 -139 ...
+ $ vz0                             : num [1:999] -2.338 -0.628 0.124 -1.173 -3.23 ...
+ $ ax                              : num [1:999] -12.84 -17.01 -20.79 3.88 -15.53 ...
+ $ ay                              : num [1:999] 30.3 24.6 29.6 24 28.2 ...
+ $ az                              : num [1:999] -16.4 -31.4 -30.5 -42.3 -19.9 ...
+ $ sz_top                          : num [1:999] 3.1 3.1 3.09 3.66 3.18 3.55 3.51 2.95 3.6 3.58 ...
+ $ sz_bot                          : num [1:999] 1.4 1.4 1.39 1.73 1.45 1.66 1.75 1.47 1.67 1.59 ...
+ $ hit_distance_sc                 : num [1:999] 180 3 NA 1 NA NA NA NA NA NA ...
+ $ launch_speed                    : num [1:999] 61.9 69 NA 31.7 NA NA NA NA NA NA ...
+ $ launch_angle                    : num [1:999] 28 -38 NA -62 NA NA NA NA NA NA ...
+ $ effective_speed                 : num [1:999] 93.5 87.4 93.7 81.1 94.3 91 91 93.1 90.7 94.6 ...
+ $ release_spin_rate               : num [1:999] 2061 1677 1832 2479 2153 ...
+ $ release_extension               : num [1:999] 5.4 5.4 5.5 6.7 5.5 6.8 6.2 5.6 7.1 7 ...
+ $ game_pk                         : num [1:999] 745273 745273 745273 747220 745273 ...
+ $ fielder_2                       : num [1:999] 663728 663728 663728 672515 663728 ...
+ $ fielder_3                       : num [1:999] 664034 664034 664034 572233 664034 ...
+ $ fielder_4                       : num [1:999] 593871 593871 593871 606466 593871 ...
+ $ fielder_5                       : num [1:999] 668942 668942 668942 553993 668942 ...
+ $ fielder_6                       : num [1:999] 641487 641487 641487 672695 641487 ...
+ $ fielder_7                       : num [1:999] 686527 686527 686527 666971 686527 ...
+ $ fielder_8                       : num [1:999] 677594 677594 677594 678489 677594 ...
+ $ fielder_9                       : num [1:999] 571745 571745 571745 664983 571745 ...
+ $ release_pos_y                   : num [1:999] 55.1 55.1 55 53.8 55 ...
+ $ estimated_ba_using_speedangle   : num [1:999] 0.709 NA NA 0.286 NA NA NA NA NA NA ...
+ $ estimated_woba_using_speedangle : num [1:999] 0.638 NA NA 0.243 0 ...
+ $ woba_value                      : num [1:999] 0.9 NA NA 0 0 0.7 0.7 NA NA NA ...
+ $ woba_denom                      : num [1:999] 1 NA NA 1 1 1 1 NA NA NA ...
+ $ babip_value                     : num [1:999] 1 NA NA 0 0 0 0 NA NA NA ...
+ $ iso_value                       : num [1:999] 0 NA NA 0 0 0 0 NA NA NA ...
+ $ launch_speed_angle              : num [1:999] 4 NA NA 1 NA NA NA NA NA NA ...
+ $ at_bat_number                   : num [1:999] 46 46 46 45 45 37 46 45 37 45 ...
+ $ pitch_number                    : num [1:999] 3 2 1 6 4 4 8 3 3 5 ...
+ $ pitch_name                      : chr [1:999] "4-Seam Fastball" "Changeup" "Sinker" "Knuckle Curve" ...
+ $ home_score                      : num [1:999] 0 0 0 3 0 5 4 0 5 3 ...
+ $ away_score                      : num [1:999] 4 4 4 0 4 2 3 4 2 0 ...
+ $ bat_score                       : num [1:999] 4 4 4 0 4 5 3 4 5 0 ...
+ $ fld_score                       : num [1:999] 0 0 0 3 0 2 4 0 2 3 ...
+ $ post_away_score                 : num [1:999] 4 4 4 0 4 2 3 4 2 0 ...
+ $ post_home_score                 : num [1:999] 0 0 0 3 0 5 4 0 5 3 ...
+ $ post_bat_score                  : num [1:999] 4 4 4 0 4 5 3 4 5 0 ...
+ $ post_fld_score                  : num [1:999] 0 0 0 3 0 2 4 0 2 3 ...
+ $ if_fielding_alignment           : chr [1:999] "Infield shade" "Standard" "Standard" "Infield shade" ...
+ $ of_fielding_alignment           : chr [1:999] "Standard" "Standard" "Standard" "Standard" ...
+ $ spin_axis                       : num [1:999] 239 253 238 42 238 234 122 239 243 209 ...
+ $ delta_home_win_exp              : num [1:999] -0.006 0 0 0.021 0.008 0.009 -0.06 0 0 0 ...
+ $ delta_run_exp                   : num [1:999] 0.386 -0.046 -0.039 -0.269 -0.214 0.09 0.333 -0.069 0.064 0.072 ...
+ $ bat_speed                       : logi [1:999] NA NA NA NA NA NA ...
+ $ swing_length                    : logi [1:999] NA NA NA NA NA NA ...
+ $ estimated_slg_using_speedangle  : num [1:999] 0.75 NA NA 0.296 NA NA NA NA NA NA ...
+ $ delta_pitcher_run_exp           : num [1:999] -0.386 0.046 0.039 0.269 0.214 -0.09 -0.333 0.069 -0.064 -0.072 ...
+ $ hyper_speed                     : num [1:999] 88 88 NA 88 NA NA NA NA NA NA ...
+ $ home_score_diff                 : num [1:999] -4 -4 -4 3 -4 3 1 -4 3 3 ...
+ $ bat_score_diff                  : num [1:999] 4 4 4 -3 4 3 -1 4 3 -3 ...
+ $ home_win_exp                    : num [1:999] 0.082 0.082 0.082 0.897 0.074 0.857 0.667 0.074 0.857 0.897 ...
+ $ bat_win_exp                     : num [1:999] 0.918 0.918 0.918 0.103 0.926 0.857 0.333 0.926 0.857 0.103 ...
+  [list output truncated]
+ - attr(*, "spec")=
+  .. cols(
+  ..   pitch_type = col_character(),
+  ..   game_date = col_character(),
+  ..   release_speed = col_double(),
+  ..   release_pos_x = col_double(),
+  ..   release_pos_z = col_double(),
+  ..   player_name = col_character(),
+  ..   batter = col_double(),
+  ..   pitcher = col_double(),
+  ..   events = col_character(),
+  ..   description = col_character(),
+  ..   spin_dir = col_logical(),
+  ..   spin_rate_deprecated = col_logical(),
+  ..   break_angle_deprecated = col_logical(),
+  ..   break_length_deprecated = col_logical(),
+  ..   zone = col_double(),
+  ..   des = col_character(),
+  ..   game_type = col_character(),
+  ..   stand = col_character(),
+  ..   p_throws = col_character(),
+  ..   home_team = col_character(),
+  ..   away_team = col_character(),
+  ..   type = col_character(),
+  ..   hit_location = col_double(),
+  ..   bb_type = col_character(),
+  ..   balls = col_double(),
+  ..   strikes = col_double(),
+  ..   game_year = col_double(),
+  ..   pfx_x = col_double(),
+  ..   pfx_z = col_double(),
+  ..   plate_x = col_double(),
+  ..   plate_z = col_double(),
+  ..   on_3b = col_double(),
+  ..   on_2b = col_double(),
+  ..   on_1b = col_double(),
+  ..   outs_when_up = col_double(),
+  ..   inning = col_double(),
+  ..   inning_topbot = col_character(),
+  ..   hc_x = col_double(),
+  ..   hc_y = col_double(),
+  ..   tfs_deprecated = col_logical(),
+  ..   tfs_zulu_deprecated = col_logical(),
+  ..   umpire = col_logical(),
+  ..   sv_id = col_logical(),
+  ..   vx0 = col_double(),
+  ..   vy0 = col_double(),
+  ..   vz0 = col_double(),
+  ..   ax = col_double(),
+  ..   ay = col_double(),
+  ..   az = col_double(),
+  ..   sz_top = col_double(),
+  ..   sz_bot = col_double(),
+  ..   hit_distance_sc = col_double(),
+  ..   launch_speed = col_double(),
+  ..   launch_angle = col_double(),
+  ..   effective_speed = col_double(),
+  ..   release_spin_rate = col_double(),
+  ..   release_extension = col_double(),
+  ..   game_pk = col_double(),
+  ..   fielder_2 = col_double(),
+  ..   fielder_3 = col_double(),
+  ..   fielder_4 = col_double(),
+  ..   fielder_5 = col_double(),
+  ..   fielder_6 = col_double(),
+  ..   fielder_7 = col_double(),
+  ..   fielder_8 = col_double(),
+  ..   fielder_9 = col_double(),
+  ..   release_pos_y = col_double(),
+  ..   estimated_ba_using_speedangle = col_double(),
+  ..   estimated_woba_using_speedangle = col_double(),
+  ..   woba_value = col_double(),
+  ..   woba_denom = col_double(),
+  ..   babip_value = col_double(),
+  ..   iso_value = col_double(),
+  ..   launch_speed_angle = col_double(),
+  ..   at_bat_number = col_double(),
+  ..   pitch_number = col_double(),
+  ..   pitch_name = col_character(),
+  ..   home_score = col_double(),
+  ..   away_score = col_double(),
+  ..   bat_score = col_double(),
+  ..   fld_score = col_double(),
+  ..   post_away_score = col_double(),
+  ..   post_home_score = col_double(),
+  ..   post_bat_score = col_double(),
+  ..   post_fld_score = col_double(),
+  ..   if_fielding_alignment = col_character(),
+  ..   of_fielding_alignment = col_character(),
+  ..   spin_axis = col_double(),
+  ..   delta_home_win_exp = col_double(),
+  ..   delta_run_exp = col_double(),
+  ..   bat_speed = col_logical(),
+  ..   swing_length = col_logical(),
+  ..   estimated_slg_using_speedangle = col_double(),
+  ..   delta_pitcher_run_exp = col_double(),
+  ..   hyper_speed = col_double(),
+  ..   home_score_diff = col_double(),
+  ..   bat_score_diff = col_double(),
+  ..   home_win_exp = col_double(),
+  ..   bat_win_exp = col_double(),
+  ..   age_pit_legacy = col_double(),
+  ..   age_bat_legacy = col_double(),
+  ..   age_pit = col_double(),
+  ..   age_bat = col_double(),
+  ..   n_thruorder_pitcher = col_double(),
+  ..   n_priorpa_thisgame_player_at_bat = col_double(),
+  ..   pitcher_days_since_prev_game = col_double(),
+  ..   batter_days_since_prev_game = col_double(),
+  ..   pitcher_days_until_next_game = col_double(),
+  ..   batter_days_until_next_game = col_double(),
+  ..   api_break_z_with_gravity = col_double(),
+  ..   api_break_x_arm = col_double(),
+  ..   api_break_x_batter_in = col_double(),
+  ..   arm_angle = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+</section>
+<section id="check-names-of-variables-in-the-dataset." class="slide level2">
+<h2>Check names of variables in the dataset.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">names</span>(statcast_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "pitch_type"                       "game_date"                       
+  [3] "release_speed"                    "release_pos_x"                   
+  [5] "release_pos_z"                    "player_name"                     
+  [7] "batter"                           "pitcher"                         
+  [9] "events"                           "description"                     
+ [11] "spin_dir"                         "spin_rate_deprecated"            
+ [13] "break_angle_deprecated"           "break_length_deprecated"         
+ [15] "zone"                             "des"                             
+ [17] "game_type"                        "stand"                           
+ [19] "p_throws"                         "home_team"                       
+ [21] "away_team"                        "type"                            
+ [23] "hit_location"                     "bb_type"                         
+ [25] "balls"                            "strikes"                         
+ [27] "game_year"                        "pfx_x"                           
+ [29] "pfx_z"                            "plate_x"                         
+ [31] "plate_z"                          "on_3b"                           
+ [33] "on_2b"                            "on_1b"                           
+ [35] "outs_when_up"                     "inning"                          
+ [37] "inning_topbot"                    "hc_x"                            
+ [39] "hc_y"                             "tfs_deprecated"                  
+ [41] "tfs_zulu_deprecated"              "umpire"                          
+ [43] "sv_id"                            "vx0"                             
+ [45] "vy0"                              "vz0"                             
+ [47] "ax"                               "ay"                              
+ [49] "az"                               "sz_top"                          
+ [51] "sz_bot"                           "hit_distance_sc"                 
+ [53] "launch_speed"                     "launch_angle"                    
+ [55] "effective_speed"                  "release_spin_rate"               
+ [57] "release_extension"                "game_pk"                         
+ [59] "fielder_2"                        "fielder_3"                       
+ [61] "fielder_4"                        "fielder_5"                       
+ [63] "fielder_6"                        "fielder_7"                       
+ [65] "fielder_8"                        "fielder_9"                       
+ [67] "release_pos_y"                    "estimated_ba_using_speedangle"   
+ [69] "estimated_woba_using_speedangle"  "woba_value"                      
+ [71] "woba_denom"                       "babip_value"                     
+ [73] "iso_value"                        "launch_speed_angle"              
+ [75] "at_bat_number"                    "pitch_number"                    
+ [77] "pitch_name"                       "home_score"                      
+ [79] "away_score"                       "bat_score"                       
+ [81] "fld_score"                        "post_away_score"                 
+ [83] "post_home_score"                  "post_bat_score"                  
+ [85] "post_fld_score"                   "if_fielding_alignment"           
+ [87] "of_fielding_alignment"            "spin_axis"                       
+ [89] "delta_home_win_exp"               "delta_run_exp"                   
+ [91] "bat_speed"                        "swing_length"                    
+ [93] "estimated_slg_using_speedangle"   "delta_pitcher_run_exp"           
+ [95] "hyper_speed"                      "home_score_diff"                 
+ [97] "bat_score_diff"                   "home_win_exp"                    
+ [99] "bat_win_exp"                      "age_pit_legacy"                  
+[101] "age_bat_legacy"                   "age_pit"                         
+[103] "age_bat"                          "n_thruorder_pitcher"             
+[105] "n_priorpa_thisgame_player_at_bat" "pitcher_days_since_prev_game"    
+[107] "batter_days_since_prev_game"      "pitcher_days_until_next_game"    
+[109] "batter_days_until_next_game"      "api_break_z_with_gravity"        
+[111] "api_break_x_arm"                  "api_break_x_batter_in"           
+[113] "arm_angle"                       </code></pre>
+</div>
+</div>
+</section>
+<section id="display-the-first-few-rows-of-the-dataset." class="slide level2">
+<h2>Display the first few rows of the dataset.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">head</span>(statcast_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 113
+  pitch_type game_date release_speed release_pos_x release_pos_z player_name    
+  &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          
+1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Brayan
+2 CH         4/2/2024           88.5         -2.09          4.95 Rocchio, Brayan
+3 SI         4/2/2024           95           -2.02          5.12 Rocchio, Brayan
+4 KC         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony 
+5 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin 
+6 SI         4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei 
+# ℹ 107 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;,
+#   plate_x &lt;dbl&gt;, plate_z &lt;dbl&gt;, on_3b &lt;dbl&gt;, on_2b &lt;dbl&gt;, on_1b &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="display-the-first-4-columns-of-the-dataset." class="slide level2">
+<h2>Display the first 4 columns of the dataset.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>statcast_data[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 4
+   pitch_type game_date release_speed release_pos_x
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;
+ 1 FF         4/2/2024           95           -2.01
+ 2 CH         4/2/2024           88.5         -2.09
+ 3 SI         4/2/2024           95           -2.02
+ 4 KC         4/2/2024           80.8         -3.13
+ 5 FF         4/2/2024           95.4         -1.95
+ 6 SI         4/2/2024           90.7         -1.26
+ 7 SI         4/2/2024           91.8          1.75
+ 8 SI         4/2/2024           94           -1.9 
+ 9 SI         4/2/2024           89.9         -1.14
+10 FF         4/2/2024           93.4         -3.17
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="display-the-first-4-rows-of-the-dataset." class="slide level2">
+<h2>Display the first 4 rows of the dataset.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>statcast_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 113
+  pitch_type game_date release_speed release_pos_x release_pos_z player_name    
+  &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          
+1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Brayan
+2 CH         4/2/2024           88.5         -2.09          4.95 Rocchio, Brayan
+3 SI         4/2/2024           95           -2.02          5.12 Rocchio, Brayan
+4 KC         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony 
+# ℹ 107 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;,
+#   plate_x &lt;dbl&gt;, plate_z &lt;dbl&gt;, on_3b &lt;dbl&gt;, on_2b &lt;dbl&gt;, on_1b &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="data-manipulation-using-base-r-cont." class="slide level2">
+<h2>Data Manipulation using Base R (cont.)</h2>
+<p>Display values of the variable “player_name”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>statcast_data<span class="sc">$</span>player_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "Rocchio, Brayan"               "Rocchio, Brayan"              
+  [3] "Rocchio, Brayan"               "Rizzo, Anthony"               
+  [5] "Hedges, Austin"                "Ohtani, Shohei"               
+  [7] "Casas, Triston"                "Hedges, Austin"               
+  [9] "Ohtani, Shohei"                "Rizzo, Anthony"               
+ [11] "Casas, Triston"                "Casas, Triston"               
+ [13] "Rizzo, Anthony"                "Ohtani, Shohei"               
+ [15] "Hedges, Austin"                "Rizzo, Anthony"               
+ [17] "Harris II, Michael"            "Hedges, Austin"               
+ [19] "Casas, Triston"                "Ohtani, Shohei"               
+ [21] "Hicks, Aaron"                  "Hicks, Aaron"                 
+ [23] "Casas, Triston"                "Duvall, Adam"                 
+ [25] "Betts, Mookie"                 "Naylor, Bo"                   
+ [27] "Rizzo, Anthony"                "Naylor, Bo"                   
+ [29] "Betts, Mookie"                 "Duvall, Adam"                 
+ [31] "Rizzo, Anthony"                "Casas, Triston"               
+ [33] "Hicks, Aaron"                  "Duvall, Adam"                 
+ [35] "RamÃ­rez, Harold"              "Casas, Triston"               
+ [37] "Betts, Mookie"                 "Hicks, Aaron"                 
+ [39] "Judge, Aaron"                  "Naylor, Bo"                   
+ [41] "Yelich, Christian"             "Duvall, Adam"                 
+ [43] "Bryant, Kris"                  "HernÃ¡ndez, Enrique"          
+ [45] "RamÃ­rez, Harold"              "Casas, Triston"               
+ [47] "Naylor, Bo"                    "Judge, Aaron"                 
+ [49] "Rendon, Anthony"               "Reyes, Pablo"                 
+ [51] "Wade, Tyler"                   "Rendon, Anthony"              
+ [53] "RamÃ­rez, Harold"              "Duvall, Adam"                 
+ [55] "Yelich, Christian"             "Soto, Juan"                   
+ [57] "Naylor, Bo"                    "HernÃ¡ndez, Enrique"          
+ [59] "Abreu, JosÃ©"                  "Bryant, Kris"                 
+ [61] "Moreno, Gabriel"               "Rendon, Anthony"              
+ [63] "Bryant, Kris"                  "Naylor, Bo"                   
+ [65] "Davis, J.D."                   "Yelich, Christian"            
+ [67] "Duvall, Adam"                  "HernÃ¡ndez, Enrique"          
+ [69] "Abreu, JosÃ©"                  "Soto, Juan"                   
+ [71] "Reyes, Pablo"                  "Moreno, Gabriel"              
+ [73] "RamÃ­rez, Harold"              "Wade, Tyler"                  
+ [75] "Yelich, Christian"             "Abreu, JosÃ©"                 
+ [77] "Bryant, Kris"                  "Rendon, Anthony"              
+ [79] "Davis, J.D."                   "RamÃ­rez, Harold"             
+ [81] "Naylor, Bo"                    "Moreno, Gabriel"              
+ [83] "Soto, Juan"                    "Ozuna, Marcell"               
+ [85] "HernÃ¡ndez, Enrique"           "Reyes, Pablo"                 
+ [87] "Wade, Tyler"                   "Castellanos, Nick"            
+ [89] "RamÃ­rez, Harold"              "Soto, Juan"                   
+ [91] "Rendon, Anthony"               "HernÃ¡ndez, Enrique"          
+ [93] "Davis, J.D."                   "Abreu, JosÃ©"                 
+ [95] "Wade, Tyler"                   "Yelich, Christian"            
+ [97] "Jones, Nolan"                  "Brennan, Will"                
+ [99] "Kiermaier, Kevin"              "Moreno, Gabriel"              
+[101] "Olson, Matt"                   "Reyes, Pablo"                 
+[103] "DÃ­az, Yandy"                  "Reyes, Pablo"                 
+[105] "Abreu, JosÃ©"                  "Brennan, Will"                
+[107] "Davis, J.D."                   "Olson, Matt"                  
+[109] "Lux, Gavin"                    "Neto, Zach"                   
+[111] "Kiermaier, Kevin"              "Castellanos, Nick"            
+[113] "Jones, Nolan"                  "Campusano, Luis"              
+[115] "Yelich, Christian"             "Moreno, Gabriel"              
+[117] "Soto, Juan"                    "Torres, Gleyber"              
+[119] "Campusano, Luis"               "Bleday, JJ"                   
+[121] "Diaz, Yainer"                  "Moreno, Gabriel"              
+[123] "Castellanos, Nick"             "Lux, Gavin"                   
+[125] "Neto, Zach"                    "Kiermaier, Kevin"             
+[127] "Jones, Nolan"                  "DÃ­az, Yandy"                 
+[129] "Garver, Mitch"                 "Contreras, William"           
+[131] "Reyes, Pablo"                  "India, Jonathan"              
+[133] "Brennan, Will"                 "Bride, Jonah"                 
+[135] "Heim, Jonah"                   "Olson, Matt"                  
+[137] "Jones, Nolan"                  "Diaz, Yainer"                 
+[139] "Bride, Jonah"                  "Lux, Gavin"                   
+[141] "Contreras, William"            "Heim, Jonah"                  
+[143] "Olson, Matt"                   "India, Jonathan"              
+[145] "Winn, Masyn"                   "Torres, Gleyber"              
+[147] "Vaughn, Andrew"                "Bleday, JJ"                   
+[149] "SuÃ¡rez, Eugenio"              "DÃ­az, Yandy"                 
+[151] "Garver, Mitch"                 "Neto, Zach"                   
+[153] "Brennan, Will"                 "Kiermaier, Kevin"             
+[155] "Story, Trevor"                 "Campusano, Luis"              
+[157] "Castellanos, Nick"             "India, Jonathan"              
+[159] "Brennan, Will"                 "Winn, Masyn"                  
+[161] "Garver, Mitch"                 "Torres, Gleyber"              
+[163] "Jones, Nolan"                  "Renfroe, Hunter"              
+[165] "Kiermaier, Kevin"              "Contreras, William"           
+[167] "Olson, Matt"                   "SuÃ¡rez, Eugenio"             
+[169] "Vaughn, Andrew"                "Bride, Jonah"                 
+[171] "Heim, Jonah"                   "Neto, Zach"                   
+[173] "Profar, Jurickson"             "DÃ­az, Yandy"                 
+[175] "Outman, James"                 "Diaz, Yainer"                 
+[177] "Story, Trevor"                 "Castellanos, Nick"            
+[179] "Bleday, JJ"                    "Winn, Masyn"                  
+[181] "Jones, Nolan"                  "Castellanos, Nick"            
+[183] "Contreras, William"            "Torres, Gleyber"              
+[185] "Haniger, Mitch"                "DÃ­az, Yandy"                 
+[187] "Neto, Zach"                    "Story, Trevor"                
+[189] "Profar, Jurickson"             "Walsh, Jared"                 
+[191] "SuÃ¡rez, Eugenio"              "India, Jonathan"              
+[193] "Bride, Jonah"                  "Brennan, Will"                
+[195] "Vaughn, Andrew"                "Renfroe, Hunter"              
+[197] "Bleday, JJ"                    "Kiermaier, Kevin"             
+[199] "Diaz, Yainer"                  "Olson, Matt"                  
+[201] "Outman, James"                 "Torres, Gleyber"              
+[203] "Rodgers, Brendan"              "Profar, Jurickson"            
+[205] "Walsh, Jared"                  "Devers, Rafael"               
+[207] "Neto, Zach"                    "Bleday, JJ"                   
+[209] "Haniger, Mitch"                "India, Jonathan"              
+[211] "Siani, Michael"                "Riley, Austin"                
+[213] "Vaughn, Andrew"                "DÃ­az, Yandy"                 
+[215] "Kiner-Falefa, Isiah"           "SuÃ¡rez, Eugenio"             
+[217] "Castellanos, Nick"             "Contreras, William"           
+[219] "GarcÃ­a, AvisaÃ­l"             "Outman, James"                
+[221] "Renfroe, Hunter"               "Diaz, Yainer"                 
+[223] "Freeman, Tyler"                "O'Neill, Tyler"               
+[225] "India, Jonathan"               "Freeman, Tyler"               
+[227] "Walsh, Jared"                  "Pinto, RenÃ©"                 
+[229] "HernÃ¡ndez, Teoscar"           "Haniger, Mitch"               
+[231] "Profar, Jurickson"             "Rodgers, Brendan"             
+[233] "Kiner-Falefa, Isiah"           "GarcÃ­a, AvisaÃ­l"            
+[235] "Siani, Michael"                "Vaughn, Andrew"               
+[237] "Diaz, Yainer"                  "Gelof, Zack"                  
+[239] "Neto, Zach"                    "Trevino, Jose"                
+[241] "Stott, Bryson"                 "Renfroe, Hunter"              
+[243] "SuÃ¡rez, Eugenio"              "Contreras, William"           
+[245] "Albies, Ozzie"                 "Stott, Bryson"                
+[247] "Pinto, RenÃ©"                  "Vaughn, Andrew"               
+[249] "Stephenson, Tyler"             "Clement, Ernie"               
+[251] "HernÃ¡ndez, Teoscar"           "Profar, Jurickson"            
+[253] "Renfroe, Hunter"               "Trevino, Jose"                
+[255] "O'Hoppe, Logan"                "Haniger, Mitch"               
+[257] "GarcÃ­a, AvisaÃ­l"             "Diaz, Yainer"                 
+[259] "Albies, Ozzie"                 "Siani, Michael"               
+[261] "Contreras, William"            "Gelof, Zack"                  
+[263] "Walsh, Jared"                  "O'Neill, Tyler"               
+[265] "Freeman, Tyler"                "Rodgers, Brendan"             
+[267] "Walker, Christian"             "Albies, Ozzie"                
+[269] "Langford, Wyatt"               "Freeman, Tyler"               
+[271] "Trevino, Jose"                 "Stephenson, Tyler"            
+[273] "Kim, Ha-Seong"                 "Clement, Ernie"               
+[275] "Gelof, Zack"                   "Siani, Michael"               
+[277] "Stott, Bryson"                 "Mullins, Cedric"              
+[279] "Haniger, Mitch"                "Walker, Christian"            
+[281] "Sheets, Gavin"                 "Rodgers, Brendan"             
+[283] "GarcÃ­a, AvisaÃ­l"             "HernÃ¡ndez, Teoscar"          
+[285] "Pinto, RenÃ©"                  "Swanson, Dansby"              
+[287] "O'Neill, Tyler"                "O'Hoppe, Logan"               
+[289] "Renfroe, Hunter"               "Bregman, Alex"                
+[291] "Frelick, Sal"                  "GarcÃ­a, AvisaÃ­l"            
+[293] "Stephenson, Tyler"             "Pinto, RenÃ©"                 
+[295] "Swanson, Dansby"               "HernÃ¡ndez, Teoscar"          
+[297] "Haniger, Mitch"                "Rodgers, Brendan"             
+[299] "Langford, Wyatt"               "Walker, Christian"            
+[301] "Estrada, Thairo"               "Gelof, Zack"                  
+[303] "Scott II, Victor"              "Sheets, Gavin"                
+[305] "Kim, Ha-Seong"                 "O'Neill, Tyler"               
+[307] "Clement, Ernie"                "Stott, Bryson"                
+[309] "RamÃ­rez, JosÃ©"               "Mullins, Cedric"              
+[311] "VelÃ¡zquez, Nelson"            "Bregman, Alex"                
+[313] "Albies, Ozzie"                 "O'Hoppe, Logan"               
+[315] "Frelick, Sal"                  "Trevino, Jose"                
+[317] "Langford, Wyatt"               "Estrada, Thairo"              
+[319] "Albies, Ozzie"                 "O'Hoppe, Logan"               
+[321] "Anderson, Tim"                 "Haniger, Mitch"               
+[323] "HernÃ¡ndez, Teoscar"           "Mullins, Cedric"              
+[325] "Swanson, Dansby"               "Duran, Jarren"                
+[327] "Frelick, Sal"                  "Clement, Ernie"               
+[329] "Bregman, Alex"                 "Stephenson, Tyler"            
+[331] "Kim, Ha-Seong"                 "Scott II, Victor"             
+[333] "Perez, Salvador"               "Bohm, Alec"                   
+[335] "Walker, Christian"             "Noda, Ryan"                   
+[337] "Cabrera, Oswaldo"              "Sheets, Gavin"                
+[339] "Blackmon, Charlie"             "Caballero, JosÃ©"             
+[341] "RamÃ­rez, JosÃ©"               "Polanco, Jorge"               
+[343] "Robert Jr., Luis"              "Estrada, Thairo"              
+[345] "Bregman, Alex"                 "Swanson, Dansby"              
+[347] "Blackmon, Charlie"             "Scott II, Victor"             
+[349] "Bohm, Alec"                    "Frelick, Sal"                 
+[351] "Cabrera, Oswaldo"              "Kim, Ha-Seong"                
+[353] "Walker, Christian"             "Langford, Wyatt"              
+[355] "Caballero, JosÃ©"              "Noda, Ryan"                   
+[357] "GimÃ©nez, AndrÃ©s"             "AcuÃ±a Jr., Ronald"           
+[359] "Kirk, Alejandro"               "Mullins, Cedric"              
+[361] "Perez, Salvador"               "Anderson, Tim"                
+[363] "Duran, Jarren"                 "Stephenson, Tyler"            
+[365] "Schanuel, Nolan"               "HernÃ¡ndez, Teoscar"          
+[367] "India, Jonathan"               "Morel, Christopher"           
+[369] "Bregman, Alex"                 "Mullins, Cedric"              
+[371] "Estrada, Thairo"               "AcuÃ±a Jr., Ronald"           
+[373] "Wong, Connor"                  "Polanco, Jorge"               
+[375] "Martini, Nick"                 "GarcÃ­a, Adolis"              
+[377] "Bohm, Alec"                    "Kim, Ha-Seong"                
+[379] "HernÃ¡ndez, Teoscar"           "Gurriel Jr., Lourdes"         
+[381] "Schanuel, Nolan"               "Pasquantino, Vinnie"          
+[383] "Schneider, Davis"              "Frelick, Sal"                 
+[385] "Anderson, Tim"                 "Blackmon, Charlie"            
+[387] "Scott II, Victor"              "Noda, Ryan"                   
+[389] "Robert Jr., Luis"              "India, Jonathan"              
+[391] "Cabrera, Oswaldo"              "Caballero, JosÃ©"             
+[393] "GimÃ©nez, AndrÃ©s"             "GarcÃ­a, Adolis"              
+[395] "Polanco, Jorge"                "Muncy, Max"                   
+[397] "Harper, Bryce"                 "Kwan, Steven"                 
+[399] "India, Jonathan"               "Wong, Connor"                 
+[401] "Walker, Jordan"                "Gurriel Jr., Lourdes"         
+[403] "Moncada, YoÃ¡n"                "Caballero, JosÃ©"             
+[405] "Anderson, Tim"                 "AcuÃ±a Jr., Ronald"           
+[407] "Schanuel, Nolan"               "Bregman, Alex"                
+[409] "Cabrera, Oswaldo"              "Chourio, Jackson"             
+[411] "Pasquantino, Vinnie"           "Doyle, Brenton"               
+[413] "Noda, Ryan"                    "Martini, Nick"                
+[415] "Mullins, Cedric"               "Flores, Wilmer"               
+[417] "Bellinger, Cody"               "Kim, Ha-Seong"                
+[419] "Schneider, Davis"              "Volpe, Anthony"               
+[421] "GarcÃ­a, Adolis"               "Alexander, Blaze"             
+[423] "Siri, Jose"                    "Muncy, Max"                   
+[425] "Moncada, YoÃ¡n"                "Burleson, Alec"               
+[427] "Chourio, Jackson"              "Polanco, Jorge"               
+[429] "AcuÃ±a Jr., Ronald"            "Stephenson, Tyler"            
+[431] "Mullins, Cedric"               "Bellinger, Cody"              
+[433] "Flores, Wilmer"                "Tucker, Kyle"                 
+[435] "Martini, Nick"                 "Dalbec, Bobby"                
+[437] "Schneider, Davis"              "Chisholm Jr., Jazz"           
+[439] "Noda, Ryan"                    "Pasquantino, Vinnie"          
+[441] "Harper, Bryce"                 "Rocchio, Brayan"              
+[443] "Kim, Ha-Seong"                 "Doyle, Brenton"               
+[445] "Schanuel, Nolan"               "Harper, Bryce"                
+[447] "Doyle, Brenton"                "Turang, Brice"                
+[449] "Martini, Nick"                 "Stephenson, Tyler"            
+[451] "O'Hearn, Ryan"                 "Carter, Evan"                 
+[453] "Muncy, Max"                    "Kim, Ha-Seong"                
+[455] "De La Cruz, Bryan"             "Noda, Ryan"                   
+[457] "Moncada, YoÃ¡n"                "RodrÃ­guez, Julio"            
+[459] "Burleson, Alec"                "Alvarez, Yordan"              
+[461] "Rocchio, Brayan"               "Schneider, Davis"             
+[463] "Flores, Wilmer"                "Pasquantino, Vinnie"          
+[465] "Dalbec, Bobby"                 "Siri, Jose"                   
+[467] "AcuÃ±a Jr., Ronald"            "Bellinger, Cody"              
+[469] "Schanuel, Nolan"               "Alexander, Blaze"             
+[471] "Volpe, Anthony"                "Stephenson, Tyler"            
+[473] "Noda, Ryan"                    "Turang, Brice"                
+[475] "Moncada, YoÃ¡n"                "Bellinger, Cody"              
+[477] "Carter, Evan"                  "Alexander, Blaze"             
+[479] "Volpe, Anthony"                "Martini, Nick"                
+[481] "Schanuel, Nolan"               "Toglia, Michael"              
+[483] "Crawford, J.P."                "Flores, Wilmer"               
+[485] "Turner, Justin"                "Rocchio, Brayan"              
+[487] "Burleson, Alec"                "Tromp, Chadwick"              
+[489] "Burger, Jake"                  "Muncy, Max"                   
+[491] "Machado, Manny"                "Mountcastle, Ryan"            
+[493] "Alvarez, Yordan"               "Siri, Jose"                   
+[495] "Dalbec, Bobby"                 "Harper, Bryce"                
+[497] "Witt Jr., Bobby"               "Moncada, YoÃ¡n"               
+[499] "Steer, Spencer"                "Muncy, Max"                   
+[501] "Crawford, J.P."                "Turner, Justin"               
+[503] "Carter, Evan"                  "Bell, Josh"                   
+[505] "Machado, Manny"                "Siri, Jose"                   
+[507] "Hedges, Austin"                "Suzuki, Seiya"                
+[509] "Volpe, Anthony"                "Allen, Nick"                  
+[511] "Dalbec, Bobby"                 "Tromp, Chadwick"              
+[513] "Alvarez, Yordan"               "Garcia, Maikel"               
+[515] "Toglia, Michael"               "Martini, Nick"                
+[517] "Flores, Wilmer"                "Turang, Brice"                
+[519] "Mountcastle, Ryan"             "Schanuel, Nolan"              
+[521] "Burleson, Alec"                "Harper, Bryce"                
+[523] "Alexander, Blaze"              "Toglia, Michael"              
+[525] "Flores, Wilmer"                "Muncy, Max"                   
+[527] "Machado, Manny"                "Garcia, Maikel"               
+[529] "Steer, Spencer"                "Marte, Ketel"                 
+[531] "Santander, Anthony"            "SanÃ³, Miguel"                
+[533] "Dalbec, Bobby"                 "Arenado, Nolan"               
+[535] "Turner, Trea"                  "Volpe, Anthony"               
+[537] "Carter, Evan"                  "Crawford, J.P."               
+[539] "Arraez, Luis"                  "Altuve, Jose"                 
+[541] "Tromp, Chadwick"               "Turang, Brice"                
+[543] "Hedges, Austin"                "Siri, Jose"                   
+[545] "Allen, Nick"                   "Turner, Justin"               
+[547] "Benintendi, Andrew"            "Steer, Spencer"               
+[549] "Suzuki, Seiya"                 "Steer, Spencer"               
+[551] "Flores, Wilmer"                "Arraez, Luis"                 
+[553] "Maldonado, MartÃ­n"            "Rafaela, Ceddanne"            
+[555] "Hedges, Austin"                "Toglia, Michael"              
+[557] "Verdugo, Alex"                 "Crawford, J.P."               
+[559] "Arenado, Nolan"                "Siri, Jose"                   
+[561] "Bichette, Bo"                  "Turner, Trea"                 
+[563] "Machado, Manny"                "Drury, Brandon"               
+[565] "Perdomo, Geraldo"              "Smith, Will"                  
+[567] "Hoerner, Nico"                 "Allen, Nick"                  
+[569] "Steer, Spencer"                "Tromp, Chadwick"              
+[571] "Dunn, Oliver"                  "Garcia, Maikel"               
+[573] "Carter, Evan"                  "Santander, Anthony"           
+[575] "Altuve, Jose"                  "Stanton, Giancarlo"           
+[577] "Siri, Jose"                    "Machado, Manny"               
+[579] "Altuve, Jose"                  "Steer, Spencer"               
+[581] "Butler, Lawrence"              "Steer, Spencer"               
+[583] "Rafaela, Ceddanne"             "Hedges, Austin"               
+[585] "McCarthy, Jake"                "Amaya, Miguel"                
+[587] "Dunn, Oliver"                  "Carter, Evan"                 
+[589] "Fortes, Nick"                  "Tromp, Chadwick"              
+[591] "Maldonado, MartÃ­n"            "Loftin, Nick"                 
+[593] "Rojas, Josh"                   "Conforto, Michael"            
+[595] "Drury, Brandon"                "Bichette, Bo"                 
+[597] "Arenado, Nolan"                "Santander, Anthony"           
+[599] "Toglia, Michael"               "Smith, Will"                  
+[601] "Schwarber, Kyle"               "Seager, Corey"                
+[603] "Altuve, Jose"                  "Guerrero Jr., Vladimir"       
+[605] "Casas, Triston"                "Stanton, Giancarlo"           
+[607] "McCarthy, Jake"                "Rojas, Josh"                  
+[609] "Butler, Lawrence"              "Cronenworth, Jake"            
+[611] "Conforto, Michael"             "Dunn, Oliver"                 
+[613] "Lopez, Nicky"                  "Schwarber, Kyle"              
+[615] "Loftin, Nick"                  "Mead, Curtis"                 
+[617] "Hedges, Austin"                "Contreras, Willson"           
+[619] "Fortes, Nick"                  "Steer, Spencer"               
+[621] "Arcia, Orlando"                "Smith, Will"                  
+[623] "Rutschman, Adley"              "De La Cruz, Elly"             
+[625] "Drury, Brandon"                "Amaya, Miguel"                
+[627] "Toglia, Michael"               "Conforto, Michael"            
+[629] "Tovar, Ezequiel"               "Loftin, Nick"                 
+[631] "Smith, Will"                   "Lopez, Nicky"                 
+[633] "McCarthy, Jake"                "Casas, Triston"               
+[635] "Stubbs, Garrett"               "Madrigal, Nick"               
+[637] "Cronenworth, Jake"             "Contreras, Willson"           
+[639] "Naylor, Bo"                    "Arcia, Orlando"               
+[641] "Fortes, Nick"                  "Stanton, Giancarlo"           
+[643] "Fraley, Jake"                  "Mead, Curtis"                 
+[645] "Drury, Brandon"                "Seager, Corey"                
+[647] "Rojas, Josh"                   "Dunn, Oliver"                 
+[649] "Rutschman, Adley"              "Altuve, Jose"                 
+[651] "De La Cruz, Elly"              "Guerrero Jr., Vladimir"       
+[653] "Langeliers, Shea"              "Candelario, Jeimer"           
+[655] "Naylor, Bo"                    "Drury, Brandon"               
+[657] "Contreras, Willson"            "Bride, Jonah"                 
+[659] "Langeliers, Shea"              "Stubbs, Garrett"              
+[661] "Dunn, Oliver"                  "Tatis Jr., Fernando"          
+[663] "Mead, Curtis"                  "Guerrero Jr., Vladimir"       
+[665] "Casas, Triston"                "Smith, Will"                  
+[667] "Madrigal, Nick"                "McCarthy, Jake"               
+[669] "Arcia, Orlando"                "Altuve, Jose"                 
+[671] "Henderson, Gunnar"             "Lopez, Nicky"                 
+[673] "Tovar, Ezequiel"               "Loftin, Nick"                 
+[675] "Seager, Corey"                 "Conforto, Michael"            
+[677] "De La Cruz, Elly"              "Rojas, Josh"                  
+[679] "Stanton, Giancarlo"            "Encarnacion-Strand, Christian"
+[681] "Kemp, Tony"                    "Canzone, Dominic"             
+[683] "Fraley, Jake"                  "Soler, Jorge"                 
+[685] "Freeman, Freddie"              "Drury, Brandon"               
+[687] "Seager, Corey"                 "Dunn, Oliver"                 
+[689] "GarcÃ­a, AvisaÃ­l"             "Tatis Jr., Fernando"          
+[691] "Rizzo, Anthony"                "Caratini, Victor"             
+[693] "Tovar, Ezequiel"               "Fletcher, Dominic"            
+[695] "Rosario, Amed"                 "Casas, Triston"               
+[697] "Loftin, Nick"                  "McCarthy, Jake"               
+[699] "Brennan, Will"                 "Harris II, Michael"           
+[701] "Goldschmidt, Paul"             "Guerrero Jr., Vladimir"       
+[703] "Madrigal, Nick"                "Langeliers, Shea"             
+[705] "Stubbs, Garrett"               "Goldschmidt, Paul"            
+[707] "Soler, Jorge"                  "Semien, Marcus"               
+[709] "Cowser, Colton"                "Freeman, Freddie"             
+[711] "Fraley, Jake"                  "Rooker, Brent"                
+[713] "Rosario, Amed"                 "Casas, Triston"               
+[715] "McCarthy, Jake"                "Tatis Jr., Fernando"          
+[717] "Hoskins, Rhys"                 "Harris II, Michael"           
+[719] "Schanuel, Nolan"               "Springer, George"             
+[721] "Tovar, Ezequiel"               "Loftin, Nick"                 
+[723] "Rizzo, Anthony"                "Encarnacion-Strand, Christian"
+[725] "GarcÃ­a, AvisaÃ­l"             "Caratini, Victor"             
+[727] "Fletcher, Dominic"             "Canzone, Dominic"             
+[729] "Ward, Taylor"                  "Brennan, Will"                
+[731] "Stubbs, Garrett"               "Cooper, Garrett"              
+[733] "Casas, Triston"                "Hoskins, Rhys"                
+[735] "Fraley, Jake"                  "Soler, Jorge"                 
+[737] "Harris II, Michael"            "Paredes, Isaac"               
+[739] "Tovar, Ezequiel"               "Semien, Marcus"               
+[741] "GarcÃ­a, AvisaÃ­l"             "Schanuel, Nolan"              
+[743] "Fermin, Freddy"                "Goldschmidt, Paul"            
+[745] "Caratini, Victor"              "Barrosa, Jorge"               
+[747] "Cooper, Garrett"               "Stubbs, Garrett"              
+[749] "Freeman, Freddie"              "Encarnacion-Strand, Christian"
+[751] "Canzone, Dominic"              "Rizzo, Anthony"               
+[753] "Bogaerts, Xander"              "Springer, George"             
+[755] "Fletcher, Dominic"             "Cowser, Colton"               
+[757] "Ward, Taylor"                  "Rooker, Brent"                
+[759] "Brennan, Will"                 "Hampson, Garrett"             
+[761] "Duvall, Adam"                  "Springer, George"             
+[763] "Schanuel, Nolan"               "Bogaerts, Xander"             
+[765] "Rojas, Johan"                  "Rooker, Brent"                
+[767] "Encarnacion-Strand, Christian" "Fletcher, Dominic"            
+[769] "Ward, Taylor"                  "Barrosa, Jorge"               
+[771] "Donovan, Brendan"              "GarcÃ­a, AvisaÃ­l"            
+[773] "Cowser, Colton"                "PeÃ±a, Jeremy"                
+[775] "Canzone, Dominic"              "Fraley, Jake"                 
+[777] "Taveras, Leody"                "Soler, Jorge"                 
+[779] "Paredes, Isaac"                "Rizzo, Anthony"               
+[781] "Hoskins, Rhys"                 "Freeman, Freddie"             
+[783] "Reyes, Pablo"                  "Brennan, Will"                
+[785] "Tovar, Ezequiel"               "Cooper, Garrett"              
+[787] "Shewmake, Braden"              "Freeman, Freddie"             
+[789] "Hoskins, Rhys"                 "Donovan, Brendan"             
+[791] "Barrosa, Jorge"                "Rizzo, Anthony"               
+[793] "Rooker, Brent"                 "Kiermaier, Kevin"             
+[795] "Duvall, Adam"                  "Brennan, Will"                
+[797] "France, Ty"                    "Tovar, Ezequiel"              
+[799] "Schanuel, Nolan"               "Cooper, Garrett"              
+[801] "Ward, Taylor"                  "Rojas, Johan"                 
+[803] "Hampson, Garrett"              "Chapman, Matt"                
+[805] "Benson, Will"                  "Hoerner, Nico"                
+[807] "Arozarena, Randy"              "PeÃ±a, Jeremy"                
+[809] "GarcÃ­a, AvisaÃ­l"             "Reyes, Pablo"                 
+[811] "Taveras, Leody"                "Westburg, Jordan"             
+[813] "Merrill, Jackson"              "Fraley, Jake"                 
+[815] "Fraley, Jake"                  "Ozuna, Marcell"               
+[817] "Bauers, Jake"                  "Donovan, Brendan"             
+[819] "Chapman, Matt"                 "GarcÃ­a, AvisaÃ­l"            
+[821] "Brown, Seth"                   "Taveras, Leody"               
+[823] "Happ, Ian"                     "Hoerner, Nico"                
+[825] "DÃ­az, Elias"                  "Reyes, Pablo"                 
+[827] "Hampson, Garrett"              "Arozarena, Randy"             
+[829] "Kiermaier, Kevin"              "Brennan, Will"                
+[831] "Raleigh, Cal"                  "SanÃ³, Miguel"                
+[833] "Shewmake, Braden"              "Benson, Will"                 
+[835] "Mullins, Cedric"               "PeÃ±a, Jeremy"                
+[837] "Moreno, Gabriel"               "Rizzo, Anthony"               
+[839] "Freeman, Freddie"              "Wade, Tyler"                  
+[841] "Rojas, Johan"                  "Ward, Taylor"                 
+[843] "Rizzo, Anthony"                "Ozuna, Marcell"               
+[845] "Happ, Ian"                     "Ward, Taylor"                 
+[847] "Marsh, Brandon"                "Chapman, Matt"                
+[849] "Amaya, Miguel"                 "Anderson, Tim"                
+[851] "Ohtani, Shohei"                "Brown, Seth"                  
+[853] "Campusano, Luis"               "Hampson, Garrett"             
+[855] "SanÃ³, Miguel"                 "DÃ­az, Elias"                 
+[857] "Shewmake, Braden"              "Benson, Will"                 
+[859] "Candelario, Jeimer"            "PeÃ±a, Jeremy"                
+[861] "Raleigh, Cal"                  "Arozarena, Randy"             
+[863] "Moreno, Gabriel"               "Freeman, Tyler"               
+[865] "Smith, Josh"                   "Donovan, Brendan"             
+[867] "Reyes, Pablo"                  "Kiermaier, Kevin"             
+[869] "Bauers, Jake"                  "Mullins, Cedric"              
+[871] "Happ, Ian"                     "Olson, Matt"                  
+[873] "Benson, Will"                  "Naylor, Josh"                 
+[875] "Mullins, Cedric"               "Raleigh, Cal"                 
+[877] "SanÃ³, Miguel"                 "Madrigal, Nick"               
+[879] "Castellanos, Nick"             "Vaughn, Andrew"               
+[881] "Bauers, Jake"                  "Candelario, Jeimer"           
+[883] "Judge, Aaron"                  "PeÃ±a, Jeremy"                
+[885] "Hampson, Garrett"              "Chapman, Matt"                
+[887] "Anderson, Tim"                 "McMahon, Ryan"                
+[889] "Donovan, Brendan"              "Campusano, Luis"              
+[891] "Heim, Jonah"                   "Trout, Mike"                  
+[893] "Brown, Seth"                   "Moreno, Gabriel"              
+[895] "Kiermaier, Kevin"              "Reyes, Pablo"                 
+[897] "Ohtani, Shohei"                "Arozarena, Randy"             
+[899] "SanÃ³, Miguel"                 "Judge, Aaron"                 
+[901] "Adames, Willy"                 "Chapman, Matt"                
+[903] "Castellanos, Nick"             "Olson, Matt"                  
+[905] "Happ, Ian"                     "Benson, Will"                 
+[907] "Reyes, Pablo"                  "Kiermaier, Kevin"             
+[909] "O'Hearn, Ryan"                 "Heim, Jonah"                  
+[911] "Anderson, Tim"                 "McCormick, Chas"              
+[913] "McMahon, Ryan"                 "Raleigh, Cal"                 
+[915] "Betts, Mookie"                 "Madrigal, Nick"               
+[917] "RamÃ­rez, Harold"              "Campusano, Luis"              
+[919] "Naylor, Josh"                  "Hampson, Garrett"             
+[921] "Sheets, Gavin"                 "Candelario, Jeimer"           
+[923] "Hicks, Aaron"                  "SuÃ¡rez, Eugenio"             
+[925] "Donovan, Brendan"              "Brown, Seth"                  
+[927] "Betts, Mookie"                 "Chapman, Matt"                
+[929] "Olson, Matt"                   "Sheets, Gavin"                
+[931] "Donovan, Brendan"              "Candelario, Jeimer"           
+[933] "Renfroe, Hunter"               "SuÃ¡rez, Eugenio"             
+[935] "Walsh, Jared"                  "Benson, Will"                 
+[937] "Naylor, Josh"                  "Adames, Willy"                
+[939] "Chisholm Jr., Jazz"            "Swanson, Dansby"              
+[941] "Castellanos, Nick"             "McCormick, Chas"              
+[943] "RamÃ­rez, Harold"              "Judge, Aaron"                 
+[945] "SanÃ³, Miguel"                 "Madrigal, Nick"               
+[947] "Hicks, Aaron"                  "McMahon, Ryan"                
+[949] "Brown, Seth"                   "O'Hearn, Ryan"                
+[951] "Kiner-Falefa, Isiah"           "Raleigh, Cal"                 
+[953] "Campusano, Luis"               "Reyes, Pablo"                 
+[955] "McCormick, Chas"               "Castellanos, Nick"            
+[957] "Judge, Aaron"                  "Kiner-Falefa, Isiah"          
+[959] "Story, Trevor"                 "SuÃ¡rez, Eugenio"             
+[961] "Langford, Wyatt"               "Donovan, Brendan"             
+[963] "Garver, Mitch"                 "Swanson, Dansby"              
+[965] "Chisholm Jr., Jazz"            "SanÃ³, Miguel"                
+[967] "Encarnacion-Strand, Christian" "Cooper, Garrett"              
+[969] "Sheets, Gavin"                 "Betts, Mookie"                
+[971] "Rendon, Anthony"               "Naylor, Josh"                 
+[973] "Lee, Jung Hoo"                 "India, Jonathan"              
+[975] "VelÃ¡zquez, Nelson"            "O'Hearn, Ryan"                
+[977] "Olson, Matt"                   "McMahon, Ryan"                
+[979] "Davis, J.D."                   "Adames, Willy"                
+[981] "RamÃ­rez, Harold"              "Profar, Jurickson"            
+[983] "RamÃ­rez, JosÃ©"               "Kiner-Falefa, Isiah"          
+[985] "O'Hearn, Ryan"                 "VelÃ¡zquez, Nelson"           
+[987] "Winn, Masyn"                   "Swanson, Dansby"              
+[989] "Langford, Wyatt"               "Chisholm Jr., Jazz"           
+[991] "Davis, J.D."                   "Story, Trevor"                
+[993] "Encarnacion-Strand, Christian" "Judge, Aaron"                 
+[995] "Adames, Willy"                 "India, Jonathan"              
+[997] "Rendon, Anthony"               "SanÃ³, Miguel"                
+[999] "DÃ­az, Yandy"                 </code></pre>
+</div>
+</div>
+</section>
+<section id="another-way-to-display-values" class="slide level2">
+<h2>Another way to display values</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>statcast_data[, <span class="fu">c</span>(<span class="st">"player_name"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 1
+   player_name    
+   &lt;chr&gt;          
+ 1 Rocchio, Brayan
+ 2 Rocchio, Brayan
+ 3 Rocchio, Brayan
+ 4 Rizzo, Anthony 
+ 5 Hedges, Austin 
+ 6 Ohtani, Shohei 
+ 7 Casas, Triston 
+ 8 Hedges, Austin 
+ 9 Ohtani, Shohei 
+10 Rizzo, Anthony 
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="display-the-first-10-elements-of-the-variables-player_name-and-game_date." class="slide level2">
+<h2>Display the first 10 elements of the variables “player_name” and “game_date”.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>statcast_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">c</span>(<span class="st">"player_name"</span>, <span class="st">"game_date"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   player_name     game_date
+   &lt;chr&gt;           &lt;chr&gt;    
+ 1 Rocchio, Brayan 4/2/2024 
+ 2 Rocchio, Brayan 4/2/2024 
+ 3 Rocchio, Brayan 4/2/2024 
+ 4 Rizzo, Anthony  4/2/2024 
+ 5 Hedges, Austin  4/2/2024 
+ 6 Ohtani, Shohei  4/2/2024 
+ 7 Casas, Triston  4/2/2024 
+ 8 Hedges, Austin  4/2/2024 
+ 9 Ohtani, Shohei  4/2/2024 
+10 Rizzo, Anthony  4/2/2024 </code></pre>
+</div>
+</div>
+</section>
+<section id="create-a-new-variable" class="slide level2">
+<h2>Create a new variable</h2>
+<p>Create a new variable “release_pos” by adding up values of variables “release_pos_x” and “release_pos_z”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>statcast_data<span class="sc">$</span>release_pos <span class="ot">&lt;-</span> statcast_data<span class="sc">$</span>release_pos_x <span class="sc">+</span> statcast_data<span class="sc">$</span>release_pos_z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Display only “release_pos_x”, “release_pos_z”, and “release_pos” of the updated dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>statcast_data[, <span class="fu">c</span>(<span class="st">"release_pos_x"</span>, <span class="st">"release_pos_z"</span>, <span class="st">"release_pos"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 3
+   release_pos_x release_pos_z release_pos
+           &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
+ 1         -2.01          5.22        3.21
+ 2         -2.09          4.95        2.86
+ 3         -2.02          5.12        3.1 
+ 4         -3.13          5.61        2.48
+ 5         -1.95          5.12        3.17
+ 6         -1.26          5.13        3.87
+ 7          1.75          4.89        6.64
+ 8         -1.9           4.99        3.09
+ 9         -1.14          5.01        3.87
+10         -3.17          5.63        2.46
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="dplyr" class="slide level2">
+<h2>dplyr</h2>
+<ul>
+<li>The dplyr package can be used to
+<ul>
+<li>select relevant variables</li>
+<li>filter out unnecessary obvservations</li>
+<li>mutate new variables, or change existing ones</li>
+<li>arrange in an easy to digest format</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-manipulation-using-dplyr" class="slide level2">
+<h2>Data Manipulation using dplyr</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For a given analysis, you may only need a subset of the columns in a data table; extracting only what you need can helpfully de-clutter, especially when you have large datasets. Select columns using select.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">select</span>(statcast_data, pitch_type, game_date, player_name, release_speed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 4
+   pitch_type game_date player_name     release_speed
+   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                   &lt;dbl&gt;
+ 1 FF         4/2/2024  Rocchio, Brayan          95  
+ 2 CH         4/2/2024  Rocchio, Brayan          88.5
+ 3 SI         4/2/2024  Rocchio, Brayan          95  
+ 4 KC         4/2/2024  Rizzo, Anthony           80.8
+ 5 FF         4/2/2024  Hedges, Austin           95.4
+ 6 SI         4/2/2024  Ohtani, Shohei           90.7
+ 7 SI         4/2/2024  Casas, Triston           91.8
+ 8 SI         4/2/2024  Hedges, Austin           94  
+ 9 SI         4/2/2024  Ohtani, Shohei           89.9
+10 FF         4/2/2024  Rizzo, Anthony           93.4
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="select-continued" class="slide level2">
+<h2>Select (continued)</h2>
+<p>You can specify the specify a range of columns to keep:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">select</span>(statcast_data, pitch_type<span class="sc">:</span>player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 6
+   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 CH         4/2/2024           88.5         -2.09          4.95 Rocchio, Bray…
+ 3 SI         4/2/2024           95           -2.02          5.12 Rocchio, Bray…
+ 4 KC         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony
+ 5 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 6 SI         4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei
+ 7 SI         4/2/2024           91.8          1.75          4.89 Casas, Triston
+ 8 SI         4/2/2024           94           -1.9           4.99 Hedges, Austin
+ 9 SI         4/2/2024           89.9         -1.14          5.01 Ohtani, Shohei
+10 FF         4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+<p>You can also specify columns you’d like to remove:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="sc">-</span>pitch_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 113
+   game_date release_speed release_pos_x release_pos_z player_name     batter
+   &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+ 1 4/2/2024           95           -2.01          5.22 Rocchio, Brayan 677587
+ 2 4/2/2024           88.5         -2.09          4.95 Rocchio, Brayan 677587
+ 3 4/2/2024           95           -2.02          5.12 Rocchio, Brayan 677587
+ 4 4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony  519203
+ 5 4/2/2024           95.4         -1.95          5.12 Hedges, Austin  595978
+ 6 4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei  660271
+ 7 4/2/2024           91.8          1.75          4.89 Casas, Triston  671213
+ 8 4/2/2024           94           -1.9           4.99 Hedges, Austin  595978
+ 9 4/2/2024           89.9         -1.14          5.01 Ohtani, Shohei  660271
+10 4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony  519203
+# ℹ 989 more rows
+# ℹ 107 more variables: pitcher &lt;dbl&gt;, events &lt;chr&gt;, description &lt;chr&gt;,
+#   spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;, break_angle_deprecated &lt;lgl&gt;,
+#   break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;, des &lt;chr&gt;, game_type &lt;chr&gt;,
+#   stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;, away_team &lt;chr&gt;, type &lt;chr&gt;,
+#   hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;, balls &lt;dbl&gt;, strikes &lt;dbl&gt;,
+#   game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, plate_x &lt;dbl&gt;, plate_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="select-continued-1" class="slide level2">
+<h2>Select (continued)</h2>
+<p>You can rename variables as part of this process:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="at">GAME_DATE =</span> game_date , <span class="at">PlAyEr_NaMe =</span> player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 2
+   GAME_DATE PlAyEr_NaMe    
+   &lt;chr&gt;     &lt;chr&gt;          
+ 1 4/2/2024  Rocchio, Brayan
+ 2 4/2/2024  Rocchio, Brayan
+ 3 4/2/2024  Rocchio, Brayan
+ 4 4/2/2024  Rizzo, Anthony 
+ 5 4/2/2024  Hedges, Austin 
+ 6 4/2/2024  Ohtani, Shohei 
+ 7 4/2/2024  Casas, Triston 
+ 8 4/2/2024  Hedges, Austin 
+ 9 4/2/2024  Ohtani, Shohei 
+10 4/2/2024  Rizzo, Anthony 
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="rename" class="slide level2">
+<h2>Rename</h2>
+<p>If all you want to do is rename something, you can use rename instead of select. This will rename the variables you care about, and keep everything else:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">rename</span>(statcast_data, <span class="at">GAME_DATE =</span> game_date , <span class="at">release_SPEED =</span> release_speed, <span class="at">PlAyEr_NaMe =</span> player_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 114
+   pitch_type GAME_DATE release_SPEED release_pos_x release_pos_z PlAyEr_NaMe   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 CH         4/2/2024           88.5         -2.09          4.95 Rocchio, Bray…
+ 3 SI         4/2/2024           95           -2.02          5.12 Rocchio, Bray…
+ 4 KC         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony
+ 5 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 6 SI         4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei
+ 7 SI         4/2/2024           91.8          1.75          4.89 Casas, Triston
+ 8 SI         4/2/2024           94           -1.9           4.99 Hedges, Austin
+ 9 SI         4/2/2024           89.9         -1.14          5.01 Ohtani, Shohei
+10 FF         4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony
+# ℹ 989 more rows
+# ℹ 108 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="helper-functions-for-select" class="slide level2">
+<h2>Helper functions for select</h2>
+<p>There are some handy helper functions for select; read about all of them using ?select_helpers. I use starts_with(), ends_with(), and contains() often, especially when there variables are named with suffixes or other standard patterns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="fu">starts_with</span>(<span class="st">"re"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 7
+   release_speed release_pos_x release_pos_z release_spin_rate release_extension
+           &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;
+ 1          95           -2.01          5.22              2061               5.4
+ 2          88.5         -2.09          4.95              1677               5.4
+ 3          95           -2.02          5.12              1832               5.5
+ 4          80.8         -3.13          5.61              2479               6.7
+ 5          95.4         -1.95          5.12              2153               5.5
+ 6          90.7         -1.26          5.13              1865               6.8
+ 7          91.8          1.75          4.89              2104               6.2
+ 8          94           -1.9           4.99              1917               5.6
+ 9          89.9         -1.14          5.01              1916               7.1
+10          93.4         -3.17          5.63              2362               7  
+# ℹ 989 more rows
+# ℹ 2 more variables: release_pos_y &lt;dbl&gt;, release_pos &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="fu">ends_with</span>(<span class="st">"er"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 999 × 5
+   batter pitcher at_bat_number pitch_number n_thruorder_pitcher
+    &lt;dbl&gt;   &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+ 1 677587  622491            46            3                   3
+ 2 677587  622491            46            2                   3
+ 3 677587  622491            46            1                   3
+ 4 519203  668678            45            6                   3
+ 5 595978  622491            45            4                   3
+ 6 660271  657277            37            4                   3
+ 7 671213  622072            46            8                   3
+ 8 595978  622491            45            3                   3
+ 9 660271  657277            37            3                   3
+10 519203  668678            45            5                   3
+# ℹ 989 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="filter" class="slide level2">
+<h2>Filter</h2>
+<p>Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t – this might break if the raw data are updated, and the thought process isn’t transparent. Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.</p>
+<p>You will often filter using comparison operators (&gt;, &gt;=, &lt;, &lt;=, ==, and !=). You may also use %in% to detect if values appear in a set, and is.na() to find missing values. The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare – and can be combined with other comparisons using the logical operators &amp; and |, or negated using !.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">filter</span>(statcast_data, pitch_type <span class="sc">==</span> <span class="st">'FF'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 237 × 114
+   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 3 FF         4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony
+ 4 FF         4/2/2024           94.4         -1.94          5.16 Hedges, Austin
+ 5 FF         4/2/2024           96.4          2.14          5.97 Hicks, Aaron  
+ 6 FF         4/2/2024           96.1          2.15          6.23 Duvall, Adam  
+ 7 FF         4/2/2024           94.3          2.22          6.26 Duvall, Adam  
+ 8 FF         4/2/2024           95.5          2.2           6.22 Duvall, Adam  
+ 9 FF         4/2/2024           92.5         -2.93          5.87 Judge, Aaron  
+10 FF         4/2/2024           95.2         -2.05          5.15 Naylor, Bo    
+# ℹ 227 more rows
+# ℹ 108 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">filter</span>(statcast_data, pitch_type <span class="sc">==</span> <span class="st">'FF'</span> <span class="sc">&amp;</span> release_speed <span class="sc">&gt;=</span> <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 211 × 114
+   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 3 FF         4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony
+ 4 FF         4/2/2024           94.4         -1.94          5.16 Hedges, Austin
+ 5 FF         4/2/2024           96.4          2.14          5.97 Hicks, Aaron  
+ 6 FF         4/2/2024           96.1          2.15          6.23 Duvall, Adam  
+ 7 FF         4/2/2024           94.3          2.22          6.26 Duvall, Adam  
+ 8 FF         4/2/2024           95.5          2.2           6.22 Duvall, Adam  
+ 9 FF         4/2/2024           92.5         -2.93          5.87 Judge, Aaron  
+10 FF         4/2/2024           95.2         -2.05          5.15 Naylor, Bo    
+# ℹ 201 more rows
+# ℹ 108 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="omit-missing-observations" class="slide level2">
+<h2>Omit missing observations</h2>
+<p>To remove any row with a missing value:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="co"># drop_na(statcast_data) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To remove rows for which a specific column is missing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">drop_na</span>(statcast_data, events) <span class="co"># will remove rows for which events is missing.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 283 × 114
+   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 KC         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony
+ 3 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 4 SI         4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei
+ 5 SI         4/2/2024           91.8          1.75          4.89 Casas, Triston
+ 6 FC         4/2/2024           91.4          2.3           6.31 Harris II, Mi…
+ 7 SI         4/2/2024           96.3          2.23          5.96 Hicks, Aaron  
+ 8 FF         4/2/2024           96.1          2.15          6.23 Duvall, Adam  
+ 9 ST         4/2/2024           83.9         -1.43          4.95 Betts, Mookie 
+10 SI         4/2/2024           94.2         -1.91          4.98 Naylor, Bo    
+# ℹ 273 more rows
+# ℹ 108 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
+#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
+#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
+#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
+#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="more-dplyr-functions" class="slide level2">
+<h2>More dplyr functions</h2>
+<p><strong>Mutate:</strong> To create new columns/add new variables while retaining the old ones, you can use mutate().</p>
+<p><strong>Arrange</strong>: To arrange the rows in your data according to the values in one or more columns, use arrange()</p>
+</section>
+<section id="pipes" class="slide level2">
+<h2>Pipes</h2>
+<ul>
+<li>Piping allows you to tie together a sequence of actions</li>
+<li>“New” to R (2014)</li>
+<li>Comes from the magrittr package; loaded by everything in the tidyverse</li>
+</ul>
+</section>
+<section id="pipes-continued" class="slide level2">
+<h2>Pipes (continued)</h2>
+<ul>
+<li>Sequence of actions to start my days
+<ul>
+<li>Wake up</li>
+<li>Brush teeth</li>
+<li>Do data science</li>
+</ul></li>
+<li>In “R”, I can nest these actions:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="co">#   happy_jeff = do_ds(brush_teeth(wake_up(asleep_jeff)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pipes-continued-1" class="slide level2">
+<h2>Pipes (continued)</h2>
+<ul>
+<li>Alternatively, I could name a bunch of intermediate objects</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="co">#   awake_jeff = wake_up(asleep_jeff)</span></span>
+<span id="cb63-2"><a href=""></a><span class="co">#   clean_teeth_jeff = brush_teeth(awake_jeff)</span></span>
+<span id="cb63-3"><a href=""></a><span class="co">#   happy_jeff = do_ds(clean_teeth_jeff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pipes-continued-2" class="slide level2">
+<h2>Pipes (continued)</h2>
+<ul>
+<li>Using pipes is easier to read and understand, and avoids clutter</li>
+<li>shortcut on Windows: Ctrl + Shift + M</li>
+<li>shortcut on Mac: Cmd + Shift + M</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="co"># happy_jeff = wake_up(asleep_jeff) %&gt;%</span></span>
+<span id="cb64-2"><a href=""></a><span class="co">#   brush_teeth() %&gt;% </span></span>
+<span id="cb64-3"><a href=""></a><span class="co">#   do_ds()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Read “%&gt;%” as “and then”</li>
+<li>The result of one function gets passed as the first argument to the next one by default, although you can be more specific</li>
+</ul>
+</section>
+<section id="piping-example" class="slide level2">
+<h2>Piping example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>statcast_data <span class="ot">=</span> </span>
+<span id="cb65-2"><a href=""></a>  <span class="fu">read_csv</span>(<span class="st">"./statcast_data.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>description) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb65-5"><a href=""></a>    <span class="at">pitch_type =</span> <span class="fu">str_to_lower</span>(pitch_type)) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-6"><a href=""></a>  <span class="fu">drop_na</span>(events)</span>
+<span id="cb65-7"><a href=""></a></span>
+<span id="cb65-8"><a href=""></a>statcast_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 283 × 112
+   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
+   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
+ 1 ff         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
+ 2 kc         4/2/2024           80.8         -3.13          5.61 Rizzo, Anthony
+ 3 ff         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
+ 4 si         4/2/2024           90.7         -1.26          5.13 Ohtani, Shohei
+ 5 si         4/2/2024           91.8          1.75          4.89 Casas, Triston
+ 6 fc         4/2/2024           91.4          2.3           6.31 Harris II, Mi…
+ 7 si         4/2/2024           96.3          2.23          5.96 Hicks, Aaron  
+ 8 ff         4/2/2024           96.1          2.15          6.23 Duvall, Adam  
+ 9 st         4/2/2024           83.9         -1.43          4.95 Betts, Mookie 
+10 si         4/2/2024           94.2         -1.91          4.98 Naylor, Bo    
+# ℹ 273 more rows
+# ℹ 106 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
+#   spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;, break_angle_deprecated &lt;lgl&gt;,
+#   break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;, des &lt;chr&gt;, game_type &lt;chr&gt;,
+#   stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;, away_team &lt;chr&gt;, type &lt;chr&gt;,
+#   hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;, balls &lt;dbl&gt;, strikes &lt;dbl&gt;,
+#   game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, plate_x &lt;dbl&gt;, plate_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="presentation_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="presentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="presentation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="presentation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
