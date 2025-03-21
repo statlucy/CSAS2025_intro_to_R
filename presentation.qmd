@@ -23,57 +23,57 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Welcome
 
--   This workshop is a part of [Connecticut Sports Analytics Symposium (CSAS) 2025](https://statds.org/events/csas2025/index.html).
+* This workshop is a part of [Connecticut Sports Analytics Symposium (CSAS) 2025](https://statds.org/events/csas2025/index.html).
 
--   This workshop aims to give a quick tour of R.
+* This workshop aims to give a quick tour of R.
 
--   All source codes of related documents of this workshop are in the GitHub repository: <https://github.com/statlucy/CSAS2025_intro_to_R>.
+* All source codes of related documents of this workshop are in the GitHub repository: <https://github.com/statlucy/CSAS2025_intro_to_R>.
 
 ## Prerequisites
 
--   A laptop with R/RStudio installed
-    -   R can be downloaded for windows users [here](https://cran.r-project.org/bin/windows/base/) and for Mac users [here](https://cran.r-project.org/bin/macosx/).
-    -   RStudio can be downloaded for all users [here](https://www.rstudio.com/products/rstudio/download/).
--   Little to no experience with R.
+* A laptop with R/RStudio installed
+    * R can be downloaded for windows users [here](https://cran.r-project.org/bin/windows/base/) and for Mac users [here](https://cran.r-project.org/bin/macosx/).
+    * RStudio can be downloaded for all users [here](https://www.rstudio.com/products/rstudio/download/).
+* Little to no experience with R.
 
 ## Outline
 
--   R Basics
+* R Basics
 
--   Data importation
+* Data importation
 
--   Data Manipulation
+* Data Manipulation
 
--   Data Visualization
+* Data Visualization
 
 ## What is R?
 
--   Language and environment for statistical computing
+* Language and environment for statistical computing
 
--   Based on the (proprietary) S language, but open source and open development
+* Based on the (proprietary) S language, but open source and open development
 
--   Homepage: https://www.r-project.org
+* Homepage: https://www.r-project.org
 
--   The Comprehensive R Archive Network (CRAN): https://cran.r-project.org
+* The Comprehensive R Archive Network (CRAN): https://cran.r-project.org
 
--   FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html
+* FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html
 
 ## Why R?
 
-> -   Open source (free software)
-> -   Runs on every major operating system
-> -   Active community (Frequent releases)
-> -   Great package ecosystem (\> 12,000 packages available on CRAN now)
-> -   Easy to get started (with some programming experience of MATLAB, C++, Python, etc.)
-> -   RStudio
+> * Open source (free software)
+> * Runs on every major operating system
+> * Active community (Frequent releases)
+> * Great package ecosystem (\> 12,000 packages available on CRAN now)
+> * Easy to get started (with some programming experience of MATLAB, C++, Python, etc.)
+> * RStudio
 
 ## What is RStudio?
 
--   RStudio is an integrated development environment (IDE) for R.
+* RStudio is an integrated development environment (IDE) for R.
 
--   It’s got everything you need to do data science in R
+* It’s got everything you need to do data science in R
 
--   This IDE is one of the better reasons to use R
+* This IDE is one of the better reasons to use R
 
 ## RStudio Interface
 
@@ -110,9 +110,9 @@ y = c(1, 3, 6, 9)
 x + y
 ```
 
--   Difference between `<-`/`->` and `=`:
-    -   `<-` and `->` are the traditional assignment operators in R. They are used to assign values to variables.
-    -   `=` is also used for assignment, but it's more commonly used within function calls to assign values to arguments.
+* Difference between `<-`/`->` and `=`:
+    * `<-` and `->` are the traditional assignment operators in R. They are used to assign values to variables.
+    * `=` is also used for assignment, but it's more commonly used within function calls to assign values to arguments.
 
 ## Functions
 
@@ -146,11 +146,11 @@ First, let's create a local R project. Move the dataset into your directory and 
 
 ## Install and Load R Packages
 
--   Install a package syntax:
+* Install a package syntax:
 
 install.packages("package_name")
 
--   Load a package syntax:
+* Load a package syntax:
 
 library(package_name)
 
@@ -253,11 +253,11 @@ statcast_data[, c("release_pos_x", "release_pos_z", "release_pos")]
 
 ## dplyr
 
--   The dplyr package can be used to
-    -   select relevant variables
-    -   filter out unnecessary obvservations
-    -   mutate new variables, or change existing ones
-    -   arrange in an easy to digest format
+* The dplyr package can be used to
+    * select relevant variables
+    * filter out unnecessary obvservations
+    * mutate new variables, or change existing ones
+    * arrange in an easy to digest format
 
 ## Data Manipulation using dplyr
 
@@ -278,7 +278,7 @@ You can specify the specify a range of columns to keep:
 ```{r}
 select(statcast_data, pitch_type:player_name)
 ```
-
+## Removing columns
 You can also specify columns you’d like to remove:
 
 ```{r}
@@ -303,25 +303,28 @@ rename(statcast_data, GAME_DATE = game_date , release_SPEED = release_speed, PlA
 
 ## Helper functions for select
 
-There are some handy helper functions for select; read about all of them using ?select_helpers. I use starts_with(), ends_with(), and contains() often, especially when there variables are named with suffixes or other standard patterns:
+There are some handy helper functions for select. Read about all of them using **?select_helpers**. For example, starts_with()
 
 ```{r}
 select(statcast_data, starts_with("re"))
 ```
-
+## Ends_with()
 ```{r}
 select(statcast_data, ends_with("er"))
 ```
 
 ## Filter
 
-Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t – this might break if the raw data are updated, and the thought process isn’t transparent. Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.
+Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t since this might break if the raw data are updated, and the thought process isn’t transparent.
 
-You will often filter using comparison operators (\>, \>=, \<, \<=, ==, and !=). You may also use %in% to detect if values appear in a set, and is.na() to find missing values. The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare – and can be combined with other comparisons using the logical operators & and \|, or negated using !.
+Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.
 
-```{r}
-filter(statcast_data, pitch_type == 'FF')
-```
+## Filter (continued)
+* You will often filter using comparison operators (\>, \>=, \<, \<=, ==, and !=).
+* You may also use %in% to detect if values appear in a set, and is.na() to find missing values.
+* The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare and can be combined with other comparisons using the logical operators & and \|, or negated using !.
+
+## Filter example
 
 ```{r}
 filter(statcast_data, pitch_type == 'FF' & release_speed >= 90)
@@ -345,21 +348,21 @@ drop_na(statcast_data, events) # will remove rows for which events is missing.
 
 **Mutate:** To create new columns/add new variables while retaining the old ones, you can use mutate().
 
-**Arrange**: To arrange the rows in your data according to the values in one or more columns, use arrange()
+**Arrange**: To arrange the rows in your data according to the values in one or more columns, use arrange().
 
 ## Pipes
 
--   Piping allows you to tie together a sequence of actions
--   “New” to R (2014)
--   Comes from the magrittr package; loaded by everything in the tidyverse
+* Piping allows you to tie together a sequence of actions
+* “New” to R (2014)
+* Comes from the magrittr package; loaded by everything in the tidyverse
 
 ## Pipes (continued)
 
--   Sequence of actions to start my days
-    -   Wake up
-    -   Brush teeth
-    -   Do data science
--   In “R”, I can nest these actions:
+* Sequence of actions to start my days
+    * Wake up
+    * Brush teeth
+    * Do data science
+* In “R”, I can nest these actions:
 
 ```{r}
 #	happy_jeff = do_ds(brush_teeth(wake_up(asleep_jeff)))
@@ -367,7 +370,7 @@ drop_na(statcast_data, events) # will remove rows for which events is missing.
 
 ## Pipes (continued)
 
--   Alternatively, I could name a bunch of intermediate objects
+* Alternatively, I could name a bunch of intermediate objects
 
 ```{r}
 #   awake_jeff = wake_up(asleep_jeff)
@@ -377,9 +380,9 @@ drop_na(statcast_data, events) # will remove rows for which events is missing.
 
 ## Pipes (continued)
 
--   Using pipes is easier to read and understand, and avoids clutter
--   shortcut on Windows: Ctrl + Shift + M
--   shortcut on Mac: Cmd + Shift + M
+* Using pipes is easier to read and understand, and avoids clutter
+* Shortcut on Windows: Ctrl + Shift + M
+* Shortcut on Mac: Cmd + Shift + M
 
 ```{r}
 # happy_jeff = wake_up(asleep_jeff) %>%
@@ -387,8 +390,8 @@ drop_na(statcast_data, events) # will remove rows for which events is missing.
 #   do_ds()
 ```
 
--   Read "%\>%" as "and then"
--   The result of one function gets passed as the first argument to the next one by default, although you can be more specific
+* Read "%\>%" as "and then"
+* The result of one function gets passed as the first argument to the next one by default, although you can be more specific
 
 ## Piping example
 
@@ -402,3 +405,157 @@ statcast_data =
 
 statcast_data
 ```
+
+## Visualization Using Base R
+
+Base R provides a variety of functions for creating data visualizations without the need for additional packages. This is useful when performing exploratory data analysis.
+
+## Scatter plot in Base R
+A scatter plot is useful for visualizing the relationship between two continuous variables.
+    
+```{r}
+# Sample data
+x <- 1:10
+y <- x^2
+
+# Create a scatter plot
+plot(x, y, main = "Scatter Plot", xlab = "X-axis", ylab = "Y-axis", 
+     col = "blue", pch = 19)
+```
+
+
+## Line plot in Base R
+
+Line plots are useful for showing trends over time or ordered categories.
+
+```{r}
+# Create a line plot
+plot(x, y, type = "l", main = "Line Plot", xlab = "X-axis", ylab = "Y-axis", 
+     col = "red")
+```
+
+## Visualization Using Base R (cont.)
+
+Bar plots are used to compare different groups or categories.
+    
+```{r}
+# Sample data
+categories <- c("A", "B", "C", "D")
+values <- c(5, 10, 15, 20)
+
+# Create a bar plot
+barplot(values, names.arg = categories, main = "Bar Plot", ylab = "Frequency", 
+        col = "cyan")
+```
+
+
+
+## Visualization Using ggplot2
+Good visualization is a critical step in data analysis.
+
+`ggplot2` is a widely-used R package for creating high-quality and customizable graphics. It's based on the grammar of graphics, a set of principles for creating consistent and comprehensible visualizations. 
+
+* Installation and loading:
+
+```{r}
+#install.packages("ggplot2")
+library(ggplot2)
+```
+
+```{r}
+statcast_data <- drop_na(statcast_data, bb_type) 
+```
+
+## Basic scatterplot
+To create a basic scatterplot, we need to map variables to the X and Y coordinate aesthetics:
+
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, y = launch_angle)) +
+  geom_point()
+```
+
+## Advanced scatterplot
+We can learn about other variables using additional aesthetic mappings.
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, y = launch_angle)) + 
+  geom_point(aes(color = bb_type))
+```
+
+## Labels
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, y = launch_angle)) + 
+  geom_point(aes(color = bb_type)) +
+  labs(
+    title = "Batted ball plot",
+    x = "Exit velocity of batted ball",
+    y = "Launch angle of batted ball",
+    caption = "Data from Statcast")
+```
+
+
+## Facet plot
+Help see each batted ball type (bb_type) clearer.
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, y = launch_angle, color = bb_type)) + 
+  geom_point(aes(size = hit_distance_sc), alpha = .5) +
+  geom_smooth(se = FALSE) + 
+  facet_grid(. ~ bb_type)
+```
+
+## Univariate plots
+Scatterplots are great, but sometimes you need to carefully understand the distribution of single variables.
+
+Histograms are great for showing the distribution of a dataset.
+```{r}
+ggplot(statcast_data, aes(x = launch_speed)) + 
+  geom_histogram()
+```
+## Histogram customization
+Can change bin width and set fill color using aesthetic mapping.
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, fill = bb_type)) + 
+  geom_histogram(binwidth = 2, alpha=0.5)
+
+```
+
+## Density plot
+The groups can be hard to see. We can try using density plots.
+```{r}
+ggplot(statcast_data, aes(x = launch_speed, fill = bb_type)) + 
+  geom_density(aes(color = bb_type), alpha = .4, adjust = .5) +
+  geom_rug(aes(color= bb_type))
+```
+
+## ggplot boxplot
+Box plots are used to show the distribution of a dataset and identify outliers.
+```{r}
+ggplot(statcast_data, aes(x = bb_type, y = launch_speed)) + 
+  geom_boxplot()
+```
+
+## Violin plot
+
+```{r}
+ggplot(statcast_data, aes(x = bb_type, y = launch_speed)) + 
+  geom_violin(aes(fill = bb_type), alpha = .5) + 
+  stat_summary(fun = "median", color = "blue")
+```
+
+## Ridge plot
+Ridge plots can be a replacement for both boxplots and violin plots. They’re implemented in the ggridges package, and are nice if you have lots of categories in which the shape of the distribution matters.
+```{r}
+# install.packages("ggridges")
+library(ggridges)
+
+ggplot(statcast_data, aes(x = launch_speed, y = bb_type)) + 
+  geom_density_ridges(scale = .85)
+```
+
+
+## References
+
+[2024 UCSAS Intro to R Workshop](https://github.com/fushengyy/UCSAS2024_intro_to_R/blob/main/UCSAS2024_presentation.Rmd)
+
+[R Class Website](https://p8105.com/index.html)
+
+[ggplot2 book](https://ggplot2-book.org/)

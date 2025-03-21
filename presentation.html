@@ -518,20 +518,20 @@ Lucy Liu
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>x <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min=</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
 <span id="cb7-2"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.30178888 0.03798359 0.21029367 0.93383069 0.26233640 0.79855055
- [7] 0.62284648 0.25843405 0.82302794 0.57647565 0.18993533 0.93182781
-[13] 0.78425096 0.99003320 0.01302616 0.16318950 0.13693960 0.69421181
-[19] 0.40630690 0.59507344</code></pre>
+<pre><code> [1] 0.656336441 0.679707359 0.877436722 0.292304886 0.047476546 0.007213634
+ [7] 0.417000049 0.583890409 0.005039440 0.663026572 0.980686933 0.453025174
+[13] 0.808054815 0.350645030 0.130566398 0.270580733 0.794825159 0.359242652
+[19] 0.510432269 0.382720455</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4865181</code></pre>
+<pre><code>[1] 0.4635106</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">var</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1048414</code></pre>
+<pre><code>[1] 0.08468377</code></pre>
 </div>
 </div>
 </section>
@@ -1591,6 +1591,9 @@ Lucy Liu
 # ℹ 989 more rows</code></pre>
 </div>
 </div>
+</section>
+<section id="removing-columns" class="slide level2">
+<h2>Removing columns</h2>
 <p>You can also specify columns you’d like to remove:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="sc">-</span>pitch_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1672,7 +1675,7 @@ Lucy Liu
 </section>
 <section id="helper-functions-for-select" class="slide level2">
 <h2>Helper functions for select</h2>
-<p>There are some handy helper functions for select; read about all of them using ?select_helpers. I use starts_with(), ends_with(), and contains() often, especially when there variables are named with suffixes or other standard patterns:</p>
+<p>There are some handy helper functions for select. Read about all of them using <strong>?select_helpers</strong>. For example, starts_with()</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="fu">starts_with</span>(<span class="st">"re"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1693,6 +1696,9 @@ Lucy Liu
 # ℹ 2 more variables: release_pos_y &lt;dbl&gt;, release_pos &lt;dbl&gt;</code></pre>
 </div>
 </div>
+</section>
+<section id="ends_with" class="slide level2">
+<h2>Ends_with()</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">select</span>(statcast_data, <span class="fu">ends_with</span>(<span class="st">"er"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1715,35 +1721,21 @@ Lucy Liu
 </section>
 <section id="filter" class="slide level2">
 <h2>Filter</h2>
-<p>Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t – this might break if the raw data are updated, and the thought process isn’t transparent. Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.</p>
-<p>You will often filter using comparison operators (&gt;, &gt;=, &lt;, &lt;=, ==, and !=). You may also use %in% to detect if values appear in a set, and is.na() to find missing values. The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare – and can be combined with other comparisons using the logical operators &amp; and |, or negated using !.</p>
+<p>Some data tables will include rows you don’t need for your current analysis. Although you could remove specific row numbers using base R, you shouldn’t since this might break if the raw data are updated, and the thought process isn’t transparent.</p>
+<p>Instead, you should filter rows based on logical expressions using the filter function. Like select, the first argument to filter is the dataframe you’re filtering; all subsequent arguments are logical expressions.</p>
+</section>
+<section id="filter-continued" class="slide level2">
+<h2>Filter (continued)</h2>
+<ul>
+<li>You will often filter using comparison operators (&gt;, &gt;=, &lt;, &lt;=, ==, and !=).</li>
+<li>You may also use %in% to detect if values appear in a set, and is.na() to find missing values.</li>
+<li>The results of comparisons are logical. The statement is TRUE or FALSE depending on the values you compare and can be combined with other comparisons using the logical operators &amp; and |, or negated using !.</li>
+</ul>
+</section>
+<section id="filter-example" class="slide level2">
+<h2>Filter example</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">filter</span>(statcast_data, pitch_type <span class="sc">==</span> <span class="st">'FF'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 237 × 114
-   pitch_type game_date release_speed release_pos_x release_pos_z player_name   
-   &lt;chr&gt;      &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;         
- 1 FF         4/2/2024           95           -2.01          5.22 Rocchio, Bray…
- 2 FF         4/2/2024           95.4         -1.95          5.12 Hedges, Austin
- 3 FF         4/2/2024           93.4         -3.17          5.63 Rizzo, Anthony
- 4 FF         4/2/2024           94.4         -1.94          5.16 Hedges, Austin
- 5 FF         4/2/2024           96.4          2.14          5.97 Hicks, Aaron  
- 6 FF         4/2/2024           96.1          2.15          6.23 Duvall, Adam  
- 7 FF         4/2/2024           94.3          2.22          6.26 Duvall, Adam  
- 8 FF         4/2/2024           95.5          2.2           6.22 Duvall, Adam  
- 9 FF         4/2/2024           92.5         -2.93          5.87 Judge, Aaron  
-10 FF         4/2/2024           95.2         -2.05          5.15 Naylor, Bo    
-# ℹ 227 more rows
-# ℹ 108 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
-#   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
-#   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
-#   des &lt;chr&gt;, game_type &lt;chr&gt;, stand &lt;chr&gt;, p_throws &lt;chr&gt;, home_team &lt;chr&gt;,
-#   away_team &lt;chr&gt;, type &lt;chr&gt;, hit_location &lt;dbl&gt;, bb_type &lt;chr&gt;,
-#   balls &lt;dbl&gt;, strikes &lt;dbl&gt;, game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">filter</span>(statcast_data, pitch_type <span class="sc">==</span> <span class="st">'FF'</span> <span class="sc">&amp;</span> release_speed <span class="sc">&gt;=</span> <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">filter</span>(statcast_data, pitch_type <span class="sc">==</span> <span class="st">'FF'</span> <span class="sc">&amp;</span> release_speed <span class="sc">&gt;=</span> <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 211 × 114
    pitch_type game_date release_speed release_pos_x release_pos_z player_name   
@@ -1772,11 +1764,11 @@ Lucy Liu
 <h2>Omit missing observations</h2>
 <p>To remove any row with a missing value:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="co"># drop_na(statcast_data) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="co"># drop_na(statcast_data) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To remove rows for which a specific column is missing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">drop_na</span>(statcast_data, events) <span class="co"># will remove rows for which events is missing.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">drop_na</span>(statcast_data, events) <span class="co"># will remove rows for which events is missing.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 283 × 114
    pitch_type game_date release_speed release_pos_x release_pos_z player_name   
@@ -1804,7 +1796,7 @@ Lucy Liu
 <section id="more-dplyr-functions" class="slide level2">
 <h2>More dplyr functions</h2>
 <p><strong>Mutate:</strong> To create new columns/add new variables while retaining the old ones, you can use mutate().</p>
-<p><strong>Arrange</strong>: To arrange the rows in your data according to the values in one or more columns, use arrange()</p>
+<p><strong>Arrange</strong>: To arrange the rows in your data according to the values in one or more columns, use arrange().</p>
 </section>
 <section id="pipes" class="slide level2">
 <h2>Pipes</h2>
@@ -1826,7 +1818,7 @@ Lucy Liu
 <li>In “R”, I can nest these actions:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="co">#   happy_jeff = do_ds(brush_teeth(wake_up(asleep_jeff)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co">#   happy_jeff = do_ds(brush_teeth(wake_up(asleep_jeff)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pipes-continued-1" class="slide level2">
@@ -1835,22 +1827,22 @@ Lucy Liu
 <li>Alternatively, I could name a bunch of intermediate objects</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="co">#   awake_jeff = wake_up(asleep_jeff)</span></span>
-<span id="cb63-2"><a href=""></a><span class="co">#   clean_teeth_jeff = brush_teeth(awake_jeff)</span></span>
-<span id="cb63-3"><a href=""></a><span class="co">#   happy_jeff = do_ds(clean_teeth_jeff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="co">#   awake_jeff = wake_up(asleep_jeff)</span></span>
+<span id="cb61-2"><a href=""></a><span class="co">#   clean_teeth_jeff = brush_teeth(awake_jeff)</span></span>
+<span id="cb61-3"><a href=""></a><span class="co">#   happy_jeff = do_ds(clean_teeth_jeff)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pipes-continued-2" class="slide level2">
 <h2>Pipes (continued)</h2>
 <ul>
 <li>Using pipes is easier to read and understand, and avoids clutter</li>
-<li>shortcut on Windows: Ctrl + Shift + M</li>
-<li>shortcut on Mac: Cmd + Shift + M</li>
+<li>Shortcut on Windows: Ctrl + Shift + M</li>
+<li>Shortcut on Mac: Cmd + Shift + M</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="co"># happy_jeff = wake_up(asleep_jeff) %&gt;%</span></span>
-<span id="cb64-2"><a href=""></a><span class="co">#   brush_teeth() %&gt;% </span></span>
-<span id="cb64-3"><a href=""></a><span class="co">#   do_ds()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="co"># happy_jeff = wake_up(asleep_jeff) %&gt;%</span></span>
+<span id="cb62-2"><a href=""></a><span class="co">#   brush_teeth() %&gt;% </span></span>
+<span id="cb62-3"><a href=""></a><span class="co">#   do_ds()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Read “%&gt;%” as “and then”</li>
@@ -1860,14 +1852,14 @@ Lucy Liu
 <section id="piping-example" class="slide level2">
 <h2>Piping example</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>statcast_data <span class="ot">=</span> </span>
-<span id="cb65-2"><a href=""></a>  <span class="fu">read_csv</span>(<span class="st">"./statcast_data.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb65-3"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>description) <span class="sc">%&gt;%</span></span>
-<span id="cb65-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb65-5"><a href=""></a>    <span class="at">pitch_type =</span> <span class="fu">str_to_lower</span>(pitch_type)) <span class="sc">%&gt;%</span> </span>
-<span id="cb65-6"><a href=""></a>  <span class="fu">drop_na</span>(events)</span>
-<span id="cb65-7"><a href=""></a></span>
-<span id="cb65-8"><a href=""></a>statcast_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>statcast_data <span class="ot">=</span> </span>
+<span id="cb63-2"><a href=""></a>  <span class="fu">read_csv</span>(<span class="st">"./statcast_data.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span>description) <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb63-5"><a href=""></a>    <span class="at">pitch_type =</span> <span class="fu">str_to_lower</span>(pitch_type)) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-6"><a href=""></a>  <span class="fu">drop_na</span>(events)</span>
+<span id="cb63-7"><a href=""></a></span>
+<span id="cb63-8"><a href=""></a>statcast_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 283 × 112
    pitch_type game_date release_speed release_pos_x release_pos_z player_name   
@@ -1891,6 +1883,170 @@ Lucy Liu
 #   game_year &lt;dbl&gt;, pfx_x &lt;dbl&gt;, pfx_z &lt;dbl&gt;, plate_x &lt;dbl&gt;, plate_z &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
+</section>
+<section id="visualization-using-base-r" class="slide level2">
+<h2>Visualization Using Base R</h2>
+<p>Base R provides a variety of functions for creating data visualizations without the need for additional packages. This is useful when performing exploratory data analysis.</p>
+</section>
+<section id="scatter-plot-in-base-r" class="slide level2">
+<h2>Scatter plot in Base R</h2>
+<p>A scatter plot is useful for visualizing the relationship between two continuous variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a><span class="co"># Sample data</span></span>
+<span id="cb65-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb65-3"><a href=""></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb65-4"><a href=""></a></span>
+<span id="cb65-5"><a href=""></a><span class="co"># Create a scatter plot</span></span>
+<span id="cb65-6"><a href=""></a><span class="fu">plot</span>(x, y, <span class="at">main =</span> <span class="st">"Scatter Plot"</span>, <span class="at">xlab =</span> <span class="st">"X-axis"</span>, <span class="at">ylab =</span> <span class="st">"Y-axis"</span>, </span>
+<span id="cb65-7"><a href=""></a>     <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<section id="line-plot-in-base-r" class="slide level2">
+<h2>Line plot in Base R</h2>
+<p>Line plots are useful for showing trends over time or ordered categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="co"># Create a line plot</span></span>
+<span id="cb66-2"><a href=""></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">main =</span> <span class="st">"Line Plot"</span>, <span class="at">xlab =</span> <span class="st">"X-axis"</span>, <span class="at">ylab =</span> <span class="st">"Y-axis"</span>, </span>
+<span id="cb66-3"><a href=""></a>     <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
+<section id="visualization-using-base-r-cont." class="slide level2">
+<h2>Visualization Using Base R (cont.)</h2>
+<p>Bar plots are used to compare different groups or categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a><span class="co"># Sample data</span></span>
+<span id="cb67-2"><a href=""></a>categories <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)</span>
+<span id="cb67-3"><a href=""></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)</span>
+<span id="cb67-4"><a href=""></a></span>
+<span id="cb67-5"><a href=""></a><span class="co"># Create a bar plot</span></span>
+<span id="cb67-6"><a href=""></a><span class="fu">barplot</span>(values, <span class="at">names.arg =</span> categories, <span class="at">main =</span> <span class="st">"Bar Plot"</span>, <span class="at">ylab =</span> <span class="st">"Frequency"</span>, </span>
+<span id="cb67-7"><a href=""></a>        <span class="at">col =</span> <span class="st">"cyan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
+<section id="visualization-using-ggplot2" class="slide level2">
+<h2>Visualization Using ggplot2</h2>
+<p>Good visualization is a critical step in data analysis.</p>
+<p><code>ggplot2</code> is a widely-used R package for creating high-quality and customizable graphics. It’s based on the grammar of graphics, a set of principles for creating consistent and comprehensible visualizations.</p>
+<ul>
+<li>Installation and loading:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co">#install.packages("ggplot2")</span></span>
+<span id="cb68-2"><a href=""></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a>statcast_data <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(statcast_data, bb_type) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="basic-scatterplot" class="slide level2">
+<h2>Basic scatterplot</h2>
+<p>To create a basic scatterplot, we need to map variables to the X and Y coordinate aesthetics:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">y =</span> launch_angle)) <span class="sc">+</span></span>
+<span id="cb70-2"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch"></section>
+<section id="advanced-scatterplot" class="slide level2">
+<h2>Advanced scatterplot</h2>
+<p>We can learn about other variables using additional aesthetic mappings.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">y =</span> launch_angle)) <span class="sc">+</span> </span>
+<span id="cb71-2"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> bb_type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section>
+<section id="labels" class="slide level2">
+<h2>Labels</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">y =</span> launch_angle)) <span class="sc">+</span> </span>
+<span id="cb72-2"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> bb_type)) <span class="sc">+</span></span>
+<span id="cb72-3"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb72-4"><a href=""></a>    <span class="at">title =</span> <span class="st">"Batted ball plot"</span>,</span>
+<span id="cb72-5"><a href=""></a>    <span class="at">x =</span> <span class="st">"Exit velocity of batted ball"</span>,</span>
+<span id="cb72-6"><a href=""></a>    <span class="at">y =</span> <span class="st">"Launch angle of batted ball"</span>,</span>
+<span id="cb72-7"><a href=""></a>    <span class="at">caption =</span> <span class="st">"Data from Statcast"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
+<section id="facet-plot" class="slide level2">
+<h2>Facet plot</h2>
+<p>Help see each batted ball type (bb_type) clearer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">y =</span> launch_angle, <span class="at">color =</span> bb_type)) <span class="sc">+</span> </span>
+<span id="cb73-2"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> hit_distance_sc), <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb73-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb73-4"><a href=""></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> bb_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section>
+<section id="univariate-plots" class="slide level2">
+<h2>Univariate plots</h2>
+<p>Scatterplots are great, but sometimes you need to carefully understand the distribution of single variables.</p>
+<p>Histograms are great for showing the distribution of a dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed)) <span class="sc">+</span> </span>
+<span id="cb74-2"><a href=""></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
+<section id="histogram-customization" class="slide level2">
+<h2>Histogram customization</h2>
+<p>Can change bin width and set fill color using aesthetic mapping.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">fill =</span> bb_type)) <span class="sc">+</span> </span>
+<span id="cb75-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
+<section id="density-plot" class="slide level2">
+<h2>Density plot</h2>
+<p>The groups can be hard to see. We can try using density plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">fill =</span> bb_type)) <span class="sc">+</span> </span>
+<span id="cb76-2"><a href=""></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">color =</span> bb_type), <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">adjust =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb76-3"><a href=""></a>  <span class="fu">geom_rug</span>(<span class="fu">aes</span>(<span class="at">color=</span> bb_type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
+<section id="ggplot-boxplot" class="slide level2">
+<h2>ggplot boxplot</h2>
+<p>Box plots are used to show the distribution of a dataset and identify outliers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> bb_type, <span class="at">y =</span> launch_speed)) <span class="sc">+</span> </span>
+<span id="cb77-2"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
+<section id="violin-plot" class="slide level2">
+<h2>Violin plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> bb_type, <span class="at">y =</span> launch_speed)) <span class="sc">+</span> </span>
+<span id="cb78-2"><a href=""></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> bb_type), <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb78-3"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"median"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-51-1.png" width="960" class="r-stretch"></section>
+<section id="ridge-plot" class="slide level2">
+<h2>Ridge plot</h2>
+<p>Ridge plots can be a replacement for both boxplots and violin plots. They’re implemented in the ggridges package, and are nice if you have lots of categories in which the shape of the distribution matters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a><span class="co"># install.packages("ggridges")</span></span>
+<span id="cb79-2"><a href=""></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb79-3"><a href=""></a></span>
+<span id="cb79-4"><a href=""></a><span class="fu">ggplot</span>(statcast_data, <span class="fu">aes</span>(<span class="at">x =</span> launch_speed, <span class="at">y =</span> bb_type)) <span class="sc">+</span> </span>
+<span id="cb79-5"><a href=""></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> .<span class="dv">85</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-52-1.png" width="960" class="r-stretch"></section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<p><a href="https://github.com/fushengyy/UCSAS2024_intro_to_R/blob/main/UCSAS2024_presentation.Rmd">2024 UCSAS Intro to R Workshop</a></p>
+<p><a href="https://p8105.com/index.html">R Class Website</a></p>
+<p><a href="https://ggplot2-book.org/">ggplot2 book</a></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
