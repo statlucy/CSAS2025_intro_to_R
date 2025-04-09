@@ -29,6 +29,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * All source codes of related documents of this workshop are in the GitHub repository: <https://github.com/statlucy/CSAS2025_intro_to_R>.
 
+## About me
+
+* 2nd Year Statistics and Applied Mathematics Student at UConn
+
+* President of UConn Joint Statistical Club
+
+* Interests: Cluster analysis, Autoregressive modeling
+
 ## Prerequisites
 
 * A laptop with R/RStudio installed
@@ -40,7 +48,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * R Basics
 
-* Data importation
+* Data Importation
 
 * Data Manipulation
 
@@ -52,11 +60,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Based on the (proprietary) S language, but open source and open development
 
-* Homepage: https://www.r-project.org
+* Homepage: <https://www.r-project.org>
 
-* The Comprehensive R Archive Network (CRAN): https://cran.r-project.org
+* The Comprehensive R Archive Network (CRAN): <https://cran.r-project.org>
 
-* FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html
+* FAQ: <https://CRAN.R-project.org/doc/FAQ/R-FAQ.html>
 
 ## Why R?
 
@@ -161,7 +169,11 @@ library(tidyverse)
 
 ## Paths
 
-There are two kinds of paths: - Absolute: a file or folder’s “full address” on your computer - Relative: directions to a file or folder from your current working directory
+There are two kinds of paths:
+
+* Absolute: a file or folder’s “full address” on your computer
+
+* Relative: directions to a file or folder from your current working directory
 
 ```{r}
 getwd()
@@ -553,6 +565,8 @@ ggplot(statcast_data, aes(x = launch_speed, y = bb_type)) +
 
 
 ## References
+
+[2025 CSAS Intro to R Workshop (this workshop)](https://github.com/statlucy/CSAS2025_intro_to_R)
 
 [2024 UCSAS Intro to R Workshop](https://github.com/fushengyy/UCSAS2024_intro_to_R/blob/main/UCSAS2024_presentation.Rmd)
 

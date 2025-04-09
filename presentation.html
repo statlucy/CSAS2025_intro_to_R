@@ -416,6 +416,14 @@ Lucy Liu
 <li><p>All source codes of related documents of this workshop are in the GitHub repository: <a href="https://github.com/statlucy/CSAS2025_intro_to_R" class="uri">https://github.com/statlucy/CSAS2025_intro_to_R</a>.</p></li>
 </ul>
 </section>
+<section id="about-me" class="slide level2">
+<h2>About me</h2>
+<ul>
+<li><p>2nd Year Statistics and Applied Mathematics Student at UConn</p></li>
+<li><p>President of UConn Joint Statistical Club</p></li>
+<li><p>Interests: Cluster analysis, Autoregressive modeling</p></li>
+</ul>
+</section>
 <section id="prerequisites" class="slide level2">
 <h2>Prerequisites</h2>
 <ul>
@@ -431,7 +439,7 @@ Lucy Liu
 <h2>Outline</h2>
 <ul>
 <li><p>R Basics</p></li>
-<li><p>Data importation</p></li>
+<li><p>Data Importation</p></li>
 <li><p>Data Manipulation</p></li>
 <li><p>Data Visualization</p></li>
 </ul>
@@ -441,9 +449,9 @@ Lucy Liu
 <ul>
 <li><p>Language and environment for statistical computing</p></li>
 <li><p>Based on the (proprietary) S language, but open source and open development</p></li>
-<li><p>Homepage: https://www.r-project.org</p></li>
-<li><p>The Comprehensive R Archive Network (CRAN): https://cran.r-project.org</p></li>
-<li><p>FAQ: https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</p></li>
+<li><p>Homepage: <a href="https://www.r-project.org" class="uri">https://www.r-project.org</a></p></li>
+<li><p>The Comprehensive R Archive Network (CRAN): <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a></p></li>
+<li><p>FAQ: <a href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.html" class="uri">https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</a></p></li>
 </ul>
 </section>
 <section id="why-r" class="slide level2">
@@ -518,20 +526,20 @@ Lucy Liu
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>x <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min=</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
 <span id="cb7-2"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.656336441 0.679707359 0.877436722 0.292304886 0.047476546 0.007213634
- [7] 0.417000049 0.583890409 0.005039440 0.663026572 0.980686933 0.453025174
-[13] 0.808054815 0.350645030 0.130566398 0.270580733 0.794825159 0.359242652
-[19] 0.510432269 0.382720455</code></pre>
+<pre><code> [1] 0.12075673 0.10401095 0.20187120 0.69017956 0.25028894 0.40088828
+ [7] 0.02786821 0.04188327 0.17461200 0.55292246 0.87678863 0.50270278
+[13] 0.54945371 0.68170887 0.86855820 0.20200721 0.29789698 0.52708475
+[19] 0.60340336 0.04214374</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4635106</code></pre>
+<pre><code>[1] 0.3858515</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">var</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08468377</code></pre>
+<pre><code>[1] 0.07593157</code></pre>
 </div>
 </div>
 </section>
@@ -566,7 +574,11 @@ Lucy Liu
 </section>
 <section id="paths" class="slide level2">
 <h2>Paths</h2>
-<p>There are two kinds of paths: - Absolute: a file or folder’s “full address” on your computer - Relative: directions to a file or folder from your current working directory</p>
+<p>There are two kinds of paths:</p>
+<ul>
+<li><p>Absolute: a file or folder’s “full address” on your computer</p></li>
+<li><p>Relative: directions to a file or folder from your current working directory</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2044,6 +2056,7 @@ Lucy Liu
 <img data-src="presentation_files/figure-revealjs/unnamed-chunk-52-1.png" width="960" class="r-stretch"></section>
 <section id="references" class="slide level2">
 <h2>References</h2>
+<p><a href="https://github.com/statlucy/CSAS2025_intro_to_R">2025 CSAS Intro to R Workshop (this workshop)</a></p>
 <p><a href="https://github.com/fushengyy/UCSAS2024_intro_to_R/blob/main/UCSAS2024_presentation.Rmd">2024 UCSAS Intro to R Workshop</a></p>
 <p><a href="https://p8105.com/index.html">R Class Website</a></p>
 <p><a href="https://ggplot2-book.org/">ggplot2 book</a></p>
