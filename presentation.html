@@ -526,20 +526,20 @@ Lucy Liu
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>x <span class="ot">=</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">min=</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
 <span id="cb7-2"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.08407147 0.56355250 0.38618256 0.61752165 0.51719804 0.18088520
- [7] 0.19519015 0.72086451 0.28059802 0.62471541 0.73987580 0.65827398
-[13] 0.83953149 0.91683620 0.99148549 0.54476542 0.67902483 0.86400395
-[19] 0.22168980 0.82248636</code></pre>
+<pre><code> [1] 0.655683721 0.925623955 0.515240869 0.098948446 0.007224132 0.576575834
+ [7] 0.992879125 0.320420977 0.636052120 0.666974488 0.008751759 0.922770915
+[13] 0.923981299 0.234070960 0.933788917 0.454187338 0.968739751 0.298987690
+[19] 0.867479213 0.388982428</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5724376</code></pre>
+<pre><code>[1] 0.5698682</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">var</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07197674</code></pre>
+<pre><code>[1] 0.1109156</code></pre>
 </div>
 </div>
 </section>
@@ -555,7 +555,7 @@ Lucy Liu
 </section>
 <section id="r-project" class="slide level2">
 <h2>R Project</h2>
-<p>First, let’s create a local R project. Move the dataset into your directory and start a new R file.</p>
+<p>First, let’s create a local R project. Download the R Project files from &lt;(https://github.com/statlucy/CSAS2025_intro_to_R)&gt; and Open Project in R Studio. Your files should appear in the Output pane. Create a new R file.</p>
 </section>
 <section id="install-and-load-r-packages" class="slide level2">
 <h2>Install and Load R Packages</h2>
@@ -1913,7 +1913,7 @@ Lucy Liu
 <span id="cb65-7"><a href=""></a>     <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
 <section id="line-plot-in-base-r" class="slide level2">
 <h2>Line plot in Base R</h2>
 <p>Line plots are useful for showing trends over time or ordered categories.</p>
@@ -1923,7 +1923,7 @@ Lucy Liu
 <span id="cb66-3"><a href=""></a>     <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
 <section id="visualization-using-base-r-cont." class="slide level2">
 <h2>Visualization Using Base R (cont.)</h2>
 <p>Bar plots are used to compare different groups or categories.</p>
@@ -1937,7 +1937,7 @@ Lucy Liu
 <span id="cb67-7"><a href=""></a>        <span class="at">col =</span> <span class="st">"cyan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
 <section id="visualization-using-ggplot2" class="slide level2">
 <h2>Visualization Using ggplot2</h2>
 <p>Good visualization is a critical step in data analysis.</p>
@@ -1961,7 +1961,7 @@ Lucy Liu
 <span id="cb70-2"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch"></section>
 <section id="advanced-scatterplot" class="slide level2">
 <h2>Advanced scatterplot</h2>
 <p>We can learn about other variables using additional aesthetic mappings.</p>
@@ -1970,7 +1970,7 @@ Lucy Liu
 <span id="cb71-2"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> bb_type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch"></section>
 <section id="labels" class="slide level2">
 <h2>Labels</h2>
 <div class="cell">
@@ -1983,7 +1983,7 @@ Lucy Liu
 <span id="cb72-7"><a href=""></a>    <span class="at">caption =</span> <span class="st">"Data from Statcast"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"></section>
 <section id="facet-plot" class="slide level2">
 <h2>Facet plot</h2>
 <p>Help see each batted ball type (bb_type) clearer.</p>
@@ -1994,7 +1994,7 @@ Lucy Liu
 <span id="cb73-4"><a href=""></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> bb_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section>
 <section id="univariate-plots" class="slide level2">
 <h2>Univariate plots</h2>
 <p>Scatterplots are great, but sometimes you need to carefully understand the distribution of single variables.</p>
@@ -2004,7 +2004,7 @@ Lucy Liu
 <span id="cb74-2"><a href=""></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section>
 <section id="histogram-customization" class="slide level2">
 <h2>Histogram customization</h2>
 <p>Can change bin width and set fill color using aesthetic mapping.</p>
@@ -2013,7 +2013,7 @@ Lucy Liu
 <span id="cb75-2"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
 <section id="density-plot" class="slide level2">
 <h2>Density plot</h2>
 <p>The groups can be hard to see. We can try using density plots.</p>
@@ -2023,7 +2023,7 @@ Lucy Liu
 <span id="cb76-3"><a href=""></a>  <span class="fu">geom_rug</span>(<span class="fu">aes</span>(<span class="at">color=</span> bb_type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
 <section id="ggplot-boxplot" class="slide level2">
 <h2>ggplot boxplot</h2>
 <p>Box plots are used to show the distribution of a dataset and identify outliers.</p>
@@ -2032,7 +2032,7 @@ Lucy Liu
 <span id="cb77-2"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
 <section id="violin-plot" class="slide level2">
 <h2>Violin plot</h2>
 <div class="cell">
@@ -2041,7 +2041,7 @@ Lucy Liu
 <span id="cb78-3"><a href=""></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"median"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-51-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-50-1.png" width="960" class="r-stretch"></section>
 <section id="ridge-plot" class="slide level2">
 <h2>Ridge plot</h2>
 <p>Ridge plots can be a replacement for both boxplots and violin plots. They’re implemented in the ggridges package, and are nice if you have lots of categories in which the shape of the distribution matters.</p>
@@ -2053,7 +2053,7 @@ Lucy Liu
 <span id="cb79-5"><a href=""></a>  <span class="fu">geom_density_ridges</span>(<span class="at">scale =</span> .<span class="dv">85</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-52-1.png" width="960" class="r-stretch"></section>
+<img data-src="presentation_files/figure-revealjs/unnamed-chunk-51-1.png" width="960" class="r-stretch"></section>
 <section id="references" class="slide level2">
 <h2>References</h2>
 <p><a href="https://github.com/statlucy/CSAS2025_intro_to_R">2025 CSAS Intro to R Workshop (this workshop)</a></p>
