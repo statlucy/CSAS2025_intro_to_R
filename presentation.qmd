@@ -147,7 +147,13 @@ ls()
 
 ## R Project
 
-First, let's create a local R project. Download the R Project files from <(https://github.com/statlucy/CSAS2025_intro_to_R)> and Open Project in R Studio. Your files should appear in the Output pane. Create a new R file.
+* First, let's create a local R project.
+
+* Download the R Project files from <https://github.com/statlucy/CSAS2025_intro_to_R>
+
+* Open Project in R Studio. Your files should appear in the Output pane.
+
+* Create a new R file.
 
 
 ## Install and Load R Packages
