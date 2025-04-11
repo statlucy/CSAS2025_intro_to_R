@@ -13,6 +13,7 @@ format:
         slide-number: true
     html:
         output-file: web.html
+        self-contained: true
     
 css: style.css
 ---
